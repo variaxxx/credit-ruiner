@@ -1,0 +1,13 @@
+@use '../../utility/breakpoints' as *;
+
+$positions: ('static', 'fixed', 'relative', 'absolute', 'sticky');
+
+@mixin positions($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  @each $position in $positions {
+    .#{$breakpoint-infix}position-#{$position} {
+      position: #{$position};
+    }
+  }
+}

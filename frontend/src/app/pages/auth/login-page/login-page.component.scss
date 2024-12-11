@@ -1,0 +1,71 @@
+@use '../../../../ui-kit/styles/utility/typography/typography' as *;
+
+app-login-page {
+  display: block;
+  height: calc(100dvh - 66px);
+  //animation: page-show .2s ease-in-out forwards;
+
+  .login-form {
+    position: relative;
+    z-index: 2;
+    background-color: rgb(255, 255, 255, .05);
+    border:  1px solid rgb(255, 255, 255, .1);
+    backdrop-filter: blur(5px);
+  }
+
+  .login-title {
+    position: relative;
+    font-family: Unbounded, sans-serif;
+    align-self: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    top: calc(100px / 3);
+    z-index: 1;
+    color: white;
+    font-size: 100px;
+  }
+
+  .input {
+    @include span-styles;
+    @include span-normal;
+
+    transition: border-color var(--default-transition), color var(--default-transition), ;
+
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    background-color: var(--black-850);
+    color: var(--black-300);
+    border: .1em solid var(--black-800);
+    caret-color: white;
+
+    &:invalid {
+      border-color: var(--red-400);
+    }
+
+    &:active, &:focus {
+      border-color: var(--black-100);
+      color: var(--black-100);
+    }
+  }
+
+  .confirm-btn {
+    button {
+      min-width: 100%;
+    }
+  }
+}
+
+@keyframes page-show {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

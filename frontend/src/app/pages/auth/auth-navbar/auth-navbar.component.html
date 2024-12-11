@@ -1,0 +1,17 @@
+<ul
+  class="flex nav-wrapper"
+>
+  <li
+    class="nav-item"
+    [class.active]="isLogin"
+    [routerLink]="['/auth/login']"
+    (click)="isLogin = true"
+  >Вход</li>
+
+  <li
+    class="nav-item"
+    [class.active]="!isLogin"
+    [routerLink]="['/auth/register']"
+    (click)="isLogin = false"
+  >Регистрация</li>
+</ul>

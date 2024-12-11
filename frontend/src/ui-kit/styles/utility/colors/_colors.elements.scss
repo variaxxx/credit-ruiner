@@ -1,0 +1,187 @@
+@use '../breakpoints' as *;
+@use '../colors/colors' as *;
+
+:root {
+  --white-1000: #fff;
+
+  --black-20: #fafafa;
+  --black-50: #f2f2f2;
+  --black-100: #e5e5e5;
+  --black-150: #d9d9d9;
+  --black-200: #ccc;
+  --black-250: #bfbfbf;
+  --black-300: #b3b3b3;
+  --black-350: #a6a6a6;
+  --black-400: #999;
+  --black-450: #8c8c8c;
+  --black-500: grey;
+  --black-550: #737373;
+  --black-600: #666;
+  --black-650: #595959;
+  --black-700: #4c4c4c;
+  --black-750: #404040;
+  --black-800: #333;
+  --black-850: #262626;
+  --black-900: #1a1a1a;
+  --black-950: #0d0d0d;
+  --black-1000: #000;
+
+  --blue-50: #eef3ff;
+  --blue-100: #e5ecff;
+  --blue-150: #dce6ff;
+  --blue-200: #cbdaff;
+  --blue-250: #bacdff;
+  --blue-300: #a8c1ff;
+  --blue-350: #97b4ff;
+  --blue-400: #86a8ff;
+  --blue-450: #749bff;
+  --blue-500: #638fff;
+  --blue-550: #5282ff;
+  --blue-600: #4e79eb;
+  --blue-650: #4a71d6;
+  --blue-700: #4768c2;
+  --blue-750: #4360ad;
+  --blue-800: #3f5799;
+  --blue-850: #3c4f85;
+  --blue-900: #384670;
+  --blue-950: #343d5c;
+  --blue-1000: #333952;
+
+  --green-50: #ebfaeb;
+  --green-100: #e2f7e1;
+  --green-150: #d8f4d7;
+  --green-200: #c4efc2;
+  --green-250: #b1e9ae;
+  --green-300: #9de49a;
+  --green-350: #89df86;
+  --green-400: #76d972;
+  --green-450: #62d45d;
+  --green-500: #4fce49;
+  --green-550: #3bc935;
+  --green-600: #3ab935;
+  --green-650: #38aa35;
+  --green-700: #379a34;
+  --green-750: #358a34;
+  --green-800: #347b34;
+  --green-850: #336b34;
+  --green-900: #315b34;
+  --green-950: #304b33;
+  --green-1000: #2f4433;
+
+  --yellow-50: #fffbed;
+  --yellow-100: #fffae4;
+  --yellow-150: #fff8db;
+  --yellow-200: #fff4ca;
+  --yellow-250: #fff1b8;
+  --yellow-300: #ffeda6;
+  --yellow-350: #ffe994;
+  --yellow-400: #ffe682;
+  --yellow-450: #ffe271;
+  --yellow-500: #ffdf5f;
+  --yellow-550: #ffdb4d;
+  --yellow-600: #eac94a;
+  --yellow-650: #d5b848;
+  --yellow-700: #c0a645;
+  --yellow-750: #ab9543;
+  --yellow-800: #968340;
+  --yellow-850: #81723d;
+  --yellow-900: #6c603b;
+  --yellow-950: #574f38;
+  --yellow-1000: #4d4637;
+
+  --orange-50: #fff1e6;
+  --orange-100: #ffebd9;
+  --orange-150: #ffe4cc;
+  --orange-200: #ffd6b3;
+  --orange-250: #ffc999;
+  --orange-300: #ffbb80;
+  --orange-350: #ffad66;
+  --orange-400: #ffa04c;
+  --orange-450: #ff9233;
+  --orange-500: #ff851a;
+  --orange-550: #f70;
+  --orange-600: #ea7005;
+  --orange-650: #d5680a;
+  --orange-700: #c0600f;
+  --orange-750: #ab5914;
+  --orange-800: #965119;
+  --orange-850: #814a1f;
+  --orange-900: #6c4324;
+  --orange-950: #573b29;
+  --orange-1000: #4d372b;
+
+  --red-50: #ffe6e6;
+  --red-100: #ffd9d9;
+  --red-150: #ffcdcc;
+  --red-200: #ffb4b3;
+  --red-250: #ff9b99;
+  --red-300: #ff8280;
+  --red-350: #ff6966;
+  --red-400: #ff504c;
+  --red-450: #ff3733;
+  --red-500: #ff1e1a;
+  --red-550: #ff0400;
+  --red-600: #ea0805;
+  --red-650: #d50c0a;
+  --red-700: #c0100f;
+  --red-750: #ab1414;
+  --red-800: #961819;
+  --red-850: #811c1f;
+  --red-900: #6c2024;
+  --red-950: #572429;
+  --red-1000: #4d262b;
+
+  --purple-50: #f4eefa;
+  --purple-100: #eee5f7;
+  --purple-150: #e9dcf5;
+  --purple-200: #ddcbf0;
+  --purple-250: #d2baeb;
+  --purple-300: #c7a9e6;
+  --purple-350: #bc97e0;
+  --purple-400: #b186db;
+  --purple-450: #a575d6;
+  --purple-500: #9a63d1;
+  --purple-550: #8f52cc;
+  --purple-600: #854ebd;
+  --purple-650: #7b4aad;
+  --purple-700: #72479e;
+  --purple-750: #68438f;
+  --purple-800: #5e3f80;
+  --purple-850: #543b70;
+  --purple-900: #4a3761;
+  --purple-950: #413452;
+  --purple-1000: #3c324a;
+
+  --grey-50: #f0f3f5;
+  --grey-100: #e9edf0;
+  --grey-150: #e1e6eb;
+  --grey-200: #d3dae0;
+  --grey-250: #c4ced6;
+  --grey-300: #b5c1cc;
+  --grey-350: #a6b5c2;
+  --grey-400: #97a9b8;
+  --grey-450: #899dad;
+  --grey-500: #7a90a3;
+  --grey-550: #6b8499;
+  --grey-600: #657b8f;
+  --grey-650: #5f7285;
+  --grey-700: #586a7a;
+  --grey-750: #526170;
+  --grey-800: #4c5866;
+  --grey-850: #464f5c;
+  --grey-900: #404652;
+  --grey-950: #393e47;
+  --grey-1000: #363942;
+
+  --soft-shadow: #0000000d;
+}
+
+@layer colors {
+  @include generate-colors(null);
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @include up-breakpoint($breakpoint) {
+      @include generate-colors($breakpoint);
+    }
+  }
+}

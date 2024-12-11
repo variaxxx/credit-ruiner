@@ -1,0 +1,55 @@
+@use '../../../ui-kit/styles/utility/typography/typography' as *;
+
+app-button {
+  button {
+    @include span-styles;
+    @include span-normal;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    border: .2em solid transparent;
+    transition: transform var(--default-transition), border-color var(--default-transition), background-color var(--default-transition);
+
+    &[data-size="sm"] {
+      padding: 12px 16px 12px 16px;
+    }
+
+    &[data-size="md"] {
+      padding: 16px 20px 16px 20px;
+    }
+
+    &[data-size="lg"] {
+      padding: 20px 24px 20px 24px;
+    }
+
+    &[data-type="primary"] {
+      @include weight-medium;
+
+      background-color: white;
+      color: black;
+
+      &:enabled:hover {
+        background-color: var(--black-50);
+        border-color: var(--black-150);
+      }
+
+      &:enabled:focus {
+        border-color: var(--black-150);
+      }
+    }
+
+    &[data-type="secondary"] {
+      background-color: var(--black-850);
+      color: white;
+
+      // TODO: primary styles
+    }
+
+    &:enabled:active {
+      transform: scale(.95);
+    }
+  }
+}

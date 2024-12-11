@@ -1,0 +1,23 @@
+@use "../../utility/breakpoints" as *;
+
+$displays: (
+  'none',
+  'inline',
+  'inline-block',
+  'block',
+  'grid',
+  'flex',
+  'inline-flex',
+);
+
+@mixin display($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+  @each $display in $displays {
+    .#{$breakpoint-infix}#{$display} {
+      display: #{$display};
+    }
+  }
+}
+
+
+

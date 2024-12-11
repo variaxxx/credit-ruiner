@@ -1,0 +1,190 @@
+@use '../breakpoints' as *;
+
+@mixin title-styles {
+  color: inherit;
+  font-family: var(--main-font), sans-serif;
+  letter-spacing: 0.015em;
+  user-select: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  @include weight-semibold;
+}
+
+@mixin weight-regular {
+  font-weight: 400;
+}
+
+@mixin weight-medium {
+  font-weight: 500;
+}
+
+@mixin weight-semibold {
+  font-weight: 600;
+}
+
+@mixin weight-bold {
+  font-weight: 700;
+}
+
+@mixin h1-desktop {
+  font-size: 48px;
+  line-height: 60px;
+}
+
+@mixin h1-mobile {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+@mixin h2-desktop {
+  font-size: 40px;
+  line-height: 52px;
+}
+
+@mixin h2-mobile {
+  font-size: 28px;
+  line-height: 36px;
+}
+
+@mixin h3-desktop {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+@mixin h3-mobile {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+@mixin h4-desktop {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+@mixin h4-mobile {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+@mixin h5-desktop {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+@mixin h5-mobile {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+@mixin h6-desktop {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+@mixin h6-mobile {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@mixin text-styles {
+  color: inherit;
+  font-family: var(--secondary-font), sans-serif;
+  letter-spacing: 0;
+  user-select: text;
+  -ms-user-select: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  @include weight-regular;
+}
+
+@mixin text-big {
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+@mixin text-body {
+  font-size: 14px;
+  line-height: 1.4em;
+}
+
+@mixin text-table {
+  font-size: 12px;
+  line-height: 1.35em;
+}
+
+@mixin text-tiny {
+  font-size: 10px;
+  line-height: 1.2em;
+}
+
+@mixin span-styles {
+  color: inherit;
+  font-family: var(--secondary-font), sans-serif;
+  letter-spacing: 0;
+  line-height: 16px;
+  user-select: text;
+  -ms-user-select: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  @include weight-regular;
+}
+
+@mixin span-big {
+  font-size: 16px;
+}
+
+@mixin span-normal {
+  font-size: 14px;
+}
+
+@mixin span-small {
+  font-size: 12px;
+}
+
+@mixin span-generation($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  .#{$breakpoint-infix}span {
+    &-big {
+      @include span-styles;
+      @include span-big;
+    }
+
+    &-normal {
+      @include span-styles;
+      @include span-normal;
+    }
+
+    &-small {
+      @include span-styles;
+      @include span-small;
+    }
+  }
+}
+
+@mixin text-generation($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  .#{$breakpoint-infix}text {
+    &-big {
+      @include text-styles;
+      @include text-big;
+    }
+
+    &-body {
+      @include text-styles;
+      @include text-body;
+    }
+
+    &-table {
+      @include text-styles;
+      @include text-table;
+    }
+
+    &-tiny {
+      @include text-styles;
+      @include text-tiny;
+    }
+  }
+}

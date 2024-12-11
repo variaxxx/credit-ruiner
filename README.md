@@ -1,3 +1,0 @@
-# CreditRuiner
-
-Not to use

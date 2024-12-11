@@ -1,0 +1,21 @@
+@use '../../utility/breakpoints' as *;
+
+$justify-content-options: (
+  'start': flex-start,
+  'end': flex-end,
+  'center': center,
+  'between': space-between,
+  'around': space-around,
+  'evenly': space-evenly,
+);
+
+
+@mixin justify-content($breakpoint) {
+  @each $name in map-keys($justify-content-options) {
+    $breakpoint-infix: breakpoint-infix($breakpoint);
+
+    .#{$breakpoint-infix}justify-content-#{$name} {
+      justify-content: map-get($justify-content-options, $name);
+    }
+  }
+}

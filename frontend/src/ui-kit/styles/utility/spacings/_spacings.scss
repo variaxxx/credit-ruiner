@@ -1,0 +1,113 @@
+@use '../../utility/breakpoints' as *;
+@use 'sass:list';
+
+$spacing-values: (0, 6, 8, 12, 14, 16, 24, 32, 40, 48, 64, 72, 80, 96, 128);
+
+$spacings-desktop: (
+  2xs: 12px,
+  xs: 16px,
+  s: 24px,
+  m: 48px,
+  l: 72px,
+  xl: 96px,
+  2xl: 128px
+);
+
+$spacings-mobile: (
+  2xs: 8px,
+  xs: 12px,
+  s: 16px,
+  m: 32px,
+  l: 48px,
+  xl: 64px,
+  2xl: 88px
+);
+
+$s-directions: (
+  t: 'top',
+  b: 'bottom'
+);
+
+$uni-directions: (
+  't': 'top',
+  'b': 'bottom',
+  'l': 'left',
+  'r': 'right'
+);
+
+$bi-directions: (
+  "x": ('left', 'right'),
+  'y': ('top', 'bottom')
+);
+
+@mixin margin($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  @each $spacing-value in $spacing-values {
+    .#{$breakpoint-infix}m-#{$spacing-value} {
+      margin: #{$spacing-value}px;
+    }
+
+    .#{$breakpoint-infix}mn-#{$spacing-value} {
+      margin: -#{$spacing-value}px;
+    }
+
+    @each $direction-selector, $direction in $uni-directions {
+      .#{$breakpoint-infix}m#{$direction-selector}-#{$spacing-value} {
+        margin-#{$direction}: #{$spacing-value}px;
+      }
+
+      .#{$breakpoint-infix}m#{$direction-selector}n-#{$spacing-value} {
+        margin-#{$direction}: -#{$spacing-value}px;
+      }
+    }
+
+    @each $direction-selector, $directions in $bi-directions {
+      .#{$breakpoint-infix}m#{$direction-selector}-#{$spacing-value} {
+        margin-#{list.nth($directions, 1)}: #{$spacing-value}px;
+        margin-#{list.nth($directions, 2)}: #{$spacing-value}px;
+      }
+
+      .#{$breakpoint-infix}m#{$direction-selector}n-#{$spacing-value} {
+        margin-#{list.nth($directions, 1)}: -#{$spacing-value}px;
+        margin-#{list.nth($directions, 2)}: -#{$spacing-value}px;
+      }
+    }
+  }
+}
+
+@mixin padding($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  @each $spacing-value in $spacing-values {
+    .#{$breakpoint-infix}p-#{$spacing-value} {
+      padding: #{$spacing-value}px;
+    }
+
+    @each $direction-selector, $direction in $uni-directions {
+      .#{$breakpoint-infix}p#{$direction-selector}-#{$spacing-value} {
+        padding-#{$direction}: #{$spacing-value}px;
+      }
+    }
+
+    @each $direction-selector, $directions in $bi-directions {
+      .#{$breakpoint-infix}p#{$direction-selector}-#{$spacing-value} {
+        padding-#{list.nth($directions, 1)}: #{$spacing-value}px;
+        padding-#{list.nth($directions, 2)}: #{$spacing-value}px;
+      }
+    }
+  }
+}
+
+@mixin custom-spacings {
+  @each $size in map-keys($spacings-desktop) {
+    @each $selector, $direction in $s-directions {
+      .s#{$selector}-#{$size} {
+        margin-#{$direction}: map-get($spacings-desktop, $size);
+        @include up-breakpoint(lg) {
+          margin-#{$direction}: map-get($spacings-mobile, $size);
+        }
+      }
+    }
+  }
+}

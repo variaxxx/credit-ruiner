@@ -1,0 +1,93 @@
+<div class="container-fluid h-100">
+  <div class="row h-100 flex align-items-center justify-content-center">
+    <div
+      class="col-sm-12 col-md-6 col-lg-6 my-32 flex flex-column align-items-center justify-content-center"
+    >
+      <span class="login-title">Регистрация</span>
+      <form
+        class="login-form rounded-18 p-16 w-100 flex flex-column align-items-start justify-content-center"
+        [formGroup]="registerForm"
+      >
+        <label
+          class="w-100 st-s"
+        >
+          <span class="span-normal px-16 text-white-1000">Имя</span>
+          <input
+            name="name"
+            class="input st-2xs"
+            type="text"
+            placeholder="Введите имя"
+            formControlName="name"
+            [required]="registerForm.controls['name'].invalid && !registerForm.controls['name'].untouched"
+          >
+        </label>
+
+        <label
+          class="w-100 st-s"
+        >
+          <span class="span-normal px-16 text-white-1000">Почта</span>
+          <input
+            name="email"
+            class="input st-2xs"
+            type="email"
+            placeholder="Введите адрес почты"
+            formControlName="email"
+            [required]="registerForm.controls['email'].invalid && !registerForm.controls['email'].untouched"
+          >
+        </label>
+
+        <label
+          class="w-100 st-s"
+        >
+          <span class="span-normal px-16 text-white-1000">Пароль</span>
+          <input
+            name="password"
+            class="input st-2xs"
+            [type]="hidePassword ? 'password' : 'text'"
+            placeholder="Введите пароль"
+            formControlName="password"
+            [required]="registerForm.controls['password'].invalid && !registerForm.controls['password'].untouched"
+          >
+        </label>
+
+        <label
+          class="w-100 st-s"
+        >
+          <span class="span-normal px-16 text-white-1000">Подтверждение пароля</span>
+          <input
+            name="password_confirmation"
+            class="input st-2xs"
+            [type]="hidePassword ? 'password' : 'text'"
+            placeholder="Подтвердите пароль"
+            formControlName="password_confirmation"
+            [required]="registerForm.controls['password_confirmation'].invalid && !registerForm.controls['password_confirmation'].untouched"
+          >
+        </label>
+
+        @if (registerForm.controls['password'].invalid && !registerForm.controls['password'].untouched) {
+          <p
+            class="text-tiny mx-16 st-2xs text-red-300"
+          >Недопустимый пароль</p>
+        } @else if (registerForm.controls['password'].value !== registerForm.controls['password_confirmation'].value && !registerForm.controls['password'].untouched && !registerForm.controls['password_confirmation'].untouched) {
+          <p
+            class="text-tiny mx-16 st-2xs text-red-300"
+          >Пароли не совпадают</p>
+        }
+
+        <app-button
+          class="st-s confirm-btn w-100"
+          size="lg"
+          type="primary"
+        >
+          Подтвердить
+        </app-button>
+
+        <span
+          class="st-s text-black-300 span-small align-self-center"
+        >
+          Забыли пароль?
+        </span>
+      </form>
+    </div>
+  </div>
+</div>

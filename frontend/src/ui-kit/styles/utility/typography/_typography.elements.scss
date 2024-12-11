@@ -1,0 +1,76 @@
+@use "./typography" as *;
+@use '../breakpoints' as *;
+
+@layer typography {
+  .regular {
+    @include weight-regular;
+  }
+
+  .medium {
+    @include weight-medium;
+  }
+
+  .semibold {
+    @include weight-semibold;
+  }
+
+  .bold {
+    @include weight-bold;
+  }
+}
+
+@layer typography.elements {
+  h1, h2, h3, h4, h5, h6 {
+    @include title-styles;
+  }
+
+  h1 {
+    @include h1-desktop;
+    @include up-breakpoint(lg) {
+      @include h1-mobile;
+    }
+  }
+
+  h2 {
+    @include h2-desktop;
+    @include up-breakpoint(lg) {
+      @include h2-mobile;
+    }
+  }
+
+  h3 {
+    @include h3-desktop;
+    @include up-breakpoint(lg) {
+      @include h3-mobile;
+    }
+  }
+
+  h4 {
+    @include h4-desktop;
+    @include up-breakpoint(lg) {
+      @include h4-mobile;
+    }
+  }
+  h5 {
+    @include h5-desktop;
+    @include up-breakpoint(lg) {
+      @include h5-mobile;
+    }
+  }
+  h6 {
+    @include h6-desktop;
+    @include up-breakpoint(lg) {
+      @include h6-mobile;
+    }
+  }
+
+  @include text-generation(null);
+  @include span-generation(null);
+
+  @each $breakpoint in $grid-breakpoints {
+    @include up-breakpoint($breakpoint) {
+      @include text-generation($breakpoint);
+      @include span-generation($breakpoint);
+    }
+  }
+}

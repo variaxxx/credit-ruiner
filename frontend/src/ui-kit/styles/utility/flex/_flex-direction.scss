@@ -1,0 +1,15 @@
+@use '../../utility/breakpoints' as *;
+
+$flex-directions: (
+  row, column, row-reverse, column-reverse
+);
+
+@mixin flex-direction($breakpoint) {
+  @each $direction in $flex-directions {
+    $breakpoint-infix: breakpoint-infix($breakpoint);
+
+    .#{$breakpoint-infix}flex-#{$direction} {
+      flex-direction: $direction;
+    }
+  }
+}

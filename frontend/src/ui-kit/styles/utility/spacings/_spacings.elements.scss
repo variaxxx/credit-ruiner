@@ -1,0 +1,16 @@
+@use '../../utility/breakpoints' as *;
+@use '../../utility/spacings/spacings' as *;
+
+@layer utility {
+  @include custom-spacings;
+
+  @include margin(null);
+  @include padding(null);
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @include up-breakpoint($breakpoint) {
+      @include margin($breakpoint);
+      @include padding($breakpoint);
+    }
+  }
+}

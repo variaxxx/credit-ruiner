@@ -1,0 +1,136 @@
+@use "../breakpoints" as *;
+
+$grid-settings: (
+  lg: (columns: 12, margin: 96px, gutter: .75rem, container: 928px),
+  md: (columns: 12, margin: 48px, gutter: .75rem, container: 672px),
+  sm: (columns: 12, margin: 16px, gutter: .75rem, container: 540px)
+);
+
+// Функция для расчета ширины колонки
+@function column-width($breakpoint, $span) {
+  $settings: map-get($grid-settings, $breakpoint);
+  $columns: map-get($settings, columns);
+
+  @return calc(100% / #{$columns} * #{$span});
+}
+
+// Миксин для установки ширины колонки
+@mixin set-column-width($breakpoint, $span) {
+  width: column-width($breakpoint, $span);
+}
+
+@mixin set-column-paddings($breakpoint) {
+  $settings: map-get($grid-settings, $breakpoint);
+  $gutter: map-get($settings, gutter);
+
+  padding-left: calc($gutter / 2);
+  padding-right: calc($gutter / 2);
+}
+
+// Миксин для установки отступа колонки
+@mixin set-column-offset($breakpoint, $offset) {
+  margin-left: column-width($breakpoint, $offset);
+}
+
+@mixin set-container-paddings($breakpoint) {
+  $settings: map-get($grid-settings, $breakpoint);
+  $margin: map-get($settings, margin);
+
+  padding-left: $margin;
+  padding-right: $margin;
+}
+
+@mixin set-container-fluid-paddings($breakpoint) {
+  $settings: map-get($grid-settings, $breakpoint);
+  $gutter: map-get($settings, gutter);
+
+  padding-left: $gutter;
+  padding-right: $gutter;
+}
+
+@mixin set-container-width($breakpoint) {
+  $settings: map-get($grid-settings, $breakpoint);
+  $margin: map-get($settings, margin);
+  $container: map-get($settings, container);
+  $gutter: map-get($settings, gutter);
+
+  max-width: $container + $margin * 2;
+}
+
+// Миксин для контейнера
+@mixin container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  @include set-container-width(lg);
+  @each $breakpoint, $value in $grid-breakpoints {
+    @include up-breakpoint($breakpoint) {
+      @include set-container-width($breakpoint);
+    }
+  }
+
+}
+
+@mixin container-paddings {
+  @include set-container-paddings(lg);
+  @each $breakpoint, $value in $grid-breakpoints {
+    @include up-breakpoint($breakpoint) {
+      @include set-container-paddings($breakpoint);
+    }
+  }
+}
+
+@mixin container-fluid-paddings {
+  @include set-container-fluid-paddings(lg);
+  @each $breakpoint, $value in $grid-breakpoints {
+    @include up-breakpoint($breakpoint) {
+      @include set-container-fluid-paddings($breakpoint);
+    }
+  }
+}
+
+// Миксин для колонок
+@mixin column($span, $breakpoint) {
+  @include set-column-paddings($breakpoint);
+  @include set-column-width($breakpoint, $span);
+}
+
+@mixin column-grow($breakpoint) {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+  @include set-column-paddings($breakpoint);
+}
+
+// Миксин для отступов колонок
+@mixin column-offset($offset, $breakpoint) {
+  @include set-column-offset($breakpoint, $offset);
+}
+
+// Миксин для класса row
+@mixin row {
+  display: flex;
+  flex-wrap: wrap;
+
+  margin-left: calc(-1 * map-get(map-get($grid-settings, lg), gutter) / 2);
+  margin-right: calc(-1 * map-get(map-get($grid-settings, lg), gutter) / 2);
+
+  @each $breakpoint, $value in $grid-breakpoints {
+    @include up-breakpoint($breakpoint) {
+      margin-left: calc(-1 * map-get(map-get($grid-settings, $breakpoint), gutter) / 2);
+      margin-right: calc(-1 * map-get(map-get($grid-settings, $breakpoint), gutter) / 2);
+    }
+  }
+}
+
+@mixin generate-columns($breakpoint) {
+  @for $i from 1 through map-get($grid-settings, $breakpoint, columns) {
+    .col-#{$breakpoint}-#{$i} {
+      @include column($i, $breakpoint);
+    }
+
+    .col-#{$breakpoint}-offset-#{$i} {
+      @include column-offset($i, $breakpoint);
+    }
+  }
+}

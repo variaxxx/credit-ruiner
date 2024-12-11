@@ -1,0 +1,61 @@
+<div class="container-fluid h-100">
+  <div class="row h-100 flex align-items-center justify-content-center">
+    <div
+      class="col-sm-12 col-md-6 col-lg-6 my-32 flex flex-column align-items-center justify-content-center"
+    >
+      <span class="login-title">Вход</span>
+      <form
+        class="login-form rounded-18 p-16 w-100 flex flex-column align-items-start justify-content-center"
+        [formGroup]="loginForm"
+      >
+        <label
+          class="w-100 st-s"
+        >
+          <span class="span-normal px-16 text-white-1000">Почта</span>
+          <input
+            name="email"
+            class="input st-2xs"
+            type="email"
+            placeholder="Введите адрес почты"
+            formControlName="email"
+            [required]="loginForm.controls['email'].invalid && !loginForm.controls['email'].untouched"
+          >
+        </label>
+
+        <label
+          class="w-100 st-s"
+        >
+          <span class="span-normal px-16 text-white-1000">Пароль</span>
+          <input
+            name="password"
+            class="input st-2xs"
+            [type]="hidePassword ? 'password' : 'text'"
+            placeholder="Введите пароль"
+            formControlName="password"
+            [required]="loginForm.controls['password'].invalid && !loginForm.controls['password'].untouched"
+          >
+        </label>
+
+        @if (wrongPassword) {
+          <p
+            class="text-tiny mx-16 st-2xs text-red-300"
+          >Неправильный пароль или пользователя не существует</p>
+        }
+
+        <app-button
+          class="st-s confirm-btn w-100"
+          size="lg"
+          type="primary"
+        >
+          Подтвердить
+        </app-button>
+
+        <span
+          class="st-s text-black-300 span-small align-self-center"
+        >
+          Забыли пароль?
+        </span>
+      </form>
+    </div>
+  </div>
+</div>

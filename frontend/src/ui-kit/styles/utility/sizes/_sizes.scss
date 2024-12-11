@@ -1,0 +1,38 @@
+@use '../breakpoints' as *;
+
+$size-values: (
+  '0': 0,
+  '100': 100%,
+  'unset': 'unset'
+);
+
+@mixin size($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  @each $key, $value in $size-values {
+    .#{$breakpoint-infix}w-#{$key} {
+      width: $value;
+    }
+
+    .#{$breakpoint-infix}h-#{$key} {
+      height: $value;
+    }
+  }
+}
+
+@mixin fixed-size($size) {
+  @include fixed-width($size);
+  @include fixed-height($size);
+}
+
+@mixin fixed-width($size) {
+  width: $size;
+  max-width: $size;
+  min-width: $size;
+}
+
+@mixin fixed-height($size) {
+  height: $size;
+  max-height: $size;
+  min-height: $size;
+}

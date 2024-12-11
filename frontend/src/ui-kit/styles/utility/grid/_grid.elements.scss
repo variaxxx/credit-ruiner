@@ -1,0 +1,47 @@
+@use "./grid" as *;
+@use "../breakpoints" as *;
+
+@layer grid {
+
+  .container, .container-fluid {
+    @include container;
+  }
+
+  .container {
+    @include container-paddings;
+
+    &-fluid {
+      @include container-fluid-paddings;
+    }
+  }
+
+  .row {
+    @include row;
+  }
+
+  @include min-breakpoint(lg) {
+    @include generate-columns(lg);
+
+    .col-lg {
+      @include column-grow(lg)
+    }
+  }
+
+  $breakpoints: map-keys($grid-breakpoints);
+  $length: length($breakpoints);
+
+  @for $i from 1 through $length {
+    $min: if($i == $length, null, nth($breakpoints, $i + 1));
+    $max: nth($breakpoints, $i);
+
+    @include min-max-breakpoint($min, $max) {
+      @include generate-columns($max);
+
+      @include up-breakpoint($max) {
+        .col-#{$max} {
+          @include column-grow($max);
+        }
+      }
+    }
+  }
+}

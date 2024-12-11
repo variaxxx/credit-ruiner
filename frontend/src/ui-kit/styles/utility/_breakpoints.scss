@@ -1,0 +1,41 @@
+$grid-breakpoints: (
+        lg: 1320px,
+        md: 960px,
+        sm: 540px
+);
+
+@function breakpoint-infix($breakpoint, $breakpoints: $grid-breakpoints) {
+  @return if(map-get($breakpoints, $breakpoint), #{$breakpoint}\:, null);
+}
+
+@function breakpoint-min-infix($breakpoint, $breakpoints: $grid-breakpoints) {
+  @return 'min-'+breakpoint-infix($breakpoint, $breakpoints)
+}
+
+@mixin up-breakpoint($breakpoint, $breakpoints: $grid-breakpoints) {
+  @if($breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content
+    }
+  } @else {
+    @content
+  }
+}
+
+@mixin min-breakpoint($breakpoint, $breakpoints: $grid-breakpoints) {
+  @if $breakpoint {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin min-max-breakpoint($min-breakpoint, $max-breakpoint, $breakpoints: $grid-breakpoints) {
+  @include min-breakpoint($min-breakpoint) {
+    @include up-breakpoint($max-breakpoint) {
+      @content
+    }
+  }
+}

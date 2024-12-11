@@ -1,0 +1,21 @@
+@use "../../utility/breakpoints" as *;
+
+@mixin flex($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  .#{$breakpoint-infix}flex-1 {
+    flex: 1 1 0;
+  }
+
+  .#{$breakpoint-infix}flex-auto {
+    flex: 1 1 auto;
+  }
+
+  .#{$breakpoint-infix}flex-initial {
+    flex: 0 1 auto;
+  }
+
+  .#{$breakpoint-infix}flex-none {
+    flex: none;
+  }
+}

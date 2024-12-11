@@ -1,0 +1,12 @@
+@use 'sizes' as *;
+@use '../breakpoints' as *;
+
+@layer utility {
+  @include size(null);
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @include up-breakpoint($breakpoint) {
+      @include size($breakpoint);
+    }
+  }
+}

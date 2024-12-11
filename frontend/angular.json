@@ -5,7 +5,16 @@
   "projects": {
     "credit-ruiner": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true,
+          "displayBlock": true,
+          "inlineStyle": false,
+          "inlineTemplate": false,
+          "project": "credit-ruiner"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -24,10 +33,16 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              "src/ui-kit/styles/ui-kit.scss"
             ],
             "scripts": []
           },
@@ -82,10 +97,16 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              "src/ui-kit/styles/ui-kit.scss"
             ],
             "scripts": []
           }

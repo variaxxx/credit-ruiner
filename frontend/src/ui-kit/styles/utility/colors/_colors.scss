@@ -1,0 +1,46 @@
+@use '../breakpoints' as *;
+
+$gradationsMap: (
+        white: (1000),
+        black: (20, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000),
+        blue: (50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000),
+        green: (50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000),
+        yellow: (50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000),
+        orange: (50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000),
+        red: (50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000),
+        purple: (50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000),
+        grey: (50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000),
+
+);
+
+@mixin generate-colors($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+  @each $color, $values in $gradationsMap {
+    @each $gradation in $values {
+      $color-selector: #{$color}-#{$gradation};
+
+      .#{$breakpoint-infix}text-#{$color-selector} {
+        color: var(--#{$color-selector});
+      }
+
+      .#{$breakpoint-infix}icon-#{$color-selector} {
+        @include icon-color(var(--#{$color-selector}));
+      }
+
+      .#{$breakpoint-infix}bg-#{$color-selector} {
+        background-color: var(--#{$color-selector});
+      }
+    }
+  }
+}
+
+@mixin icon-color($color) {
+  &.filled {
+    --icon-stroke-color: none;
+    --icon-fill-color: #{$color};
+  }
+
+  &:not(.filled) {
+    --icon-stroke-color: #{$color};
+  }
+}
