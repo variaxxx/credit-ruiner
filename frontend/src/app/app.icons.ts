@@ -1,7 +1,18 @@
 import {IconsConfig} from "../ui-kit/components/icon/icon.service";
 
 const icons: readonly string[] = [
-	'arrow-up'
+	'arrow-up',
+	'alert-circle',
+	'home',
+	'bar-chart-3',
+	'settings',
+	'history',
+	'log-out',
+	'chevrons-left',
+	'menu-closed',
+	'logo',
+	'eye-off',
+	'eye'
 ]
 
 export const iconsConfig: IconsConfig = {

@@ -1,0 +1,33 @@
+import {booleanAttribute, ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {IconComponent} from "../icon/icon.component";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
+
+@Component({
+  selector: 'app-input',
+  imports: [
+    IconComponent,
+    ReactiveFormsModule
+  ],
+  templateUrl: './input.component.html',
+  styleUrl: './input.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class InputComponent {
+  @Input({transform: booleanAttribute}) showEye?: boolean;
+  @Input() type?: string;
+  @Input({required: true}) control!: FormControl;
+  @Input({required: true}) label!: string;
+  @Input({required: true}) name!: string;
+  @Input({required: true}) required!: boolean;
+  @Input({required: true}) placeholder!: string;
+  @Input({required: true}) autocomplete!: string;
+
+  protected hideInput: boolean = true;
+
+  protected getType() {
+    if (this.showEye) {
+      return this.hideInput ? 'password' : 'text';
+    }
+    return this.type;
+  }
+}

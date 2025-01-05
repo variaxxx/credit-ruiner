@@ -1,0 +1,26 @@
+<label
+  class="w-100"
+  [style.position]="showEye ? 'relative' : 'auto'"
+>
+  <span class="label">{{ label }}</span>
+
+  <div class="input st-2xs">
+    <input
+      class="w-100"
+      [type]="getType()"
+      [name]="name"
+      [placeholder]="placeholder"
+      [autocomplete]="autocomplete"
+      [required]="required"
+      [formControl]="control"
+    >
+
+    @if (showEye) {
+      <app-icon
+        [icon]="hideInput ? 'eye-off' : 'eye'"
+        (click)="hideInput = !hideInput"
+        class="eye-btn"
+      ></app-icon>
+    }
+  </div>
+</label>

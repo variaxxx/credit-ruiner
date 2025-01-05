@@ -42,7 +42,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/ui-kit/styles/ui-kit.scss"
+              "src/ui-kit/styles/ui-kit.scss",
+              "node_modules/ngx-spinner/animations/fire.css"
             ],
             "scripts": []
           },

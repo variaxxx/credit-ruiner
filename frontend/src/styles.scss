@@ -1,10 +1,30 @@
 html, body {
   height: 100%;
-  background-color: var(--black-950);
+  background-color: var(--sidebar-background-color);
+}
+
+*::selection {
+  background-color: var(--accent-green);
+  color: var(--black-750);
+}
+
+div {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-color) transparent;
 }
 
 //VARIABLES
 
 :root {
-
+  --soft-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  --accent-green: var(--green-250);
+  --sidebar-primary-text-color: var(--black-50);
+  --sidebar-secondary-text-color: var(--black-250);
+  --sidebar-title-text-color: var(--black-500);
+  --sidebar-background-color: var(--black-950);
+  --sidebar-background-accent-color: var(--black-900);
+  --background-color: var(--black-50);
+  --background-accent-color: var(--white-1000);
+  --default-icon-color: var(--black-50);
+  --scrollbar-color: var(--black-800);
 }

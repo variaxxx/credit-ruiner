@@ -1,5 +1,21 @@
+@use '../../styles/utility/colors/colors' as *;
+@use '../../styles/utility/sizes/sizes' as *;
+
 @layer utility {
   :host {
+    transition: var(--default-transition);
     display: block;
+
+    --icon-size: 24px;
+    --icon-color: var(--default-icon-color);
+    --icon-stroke-color: none;
+    --icon-fill-color: none;
+
+    @include icon-color(var(--icon-color));
+
+    fill: var(--icon-fill-color);
+    stroke: var(--icon-stroke-color);
+
+    @include fixed-size(var(--icon-size));
   }
 }

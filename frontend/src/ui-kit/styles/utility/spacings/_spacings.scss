@@ -1,7 +1,7 @@
 @use '../../utility/breakpoints' as *;
 @use 'sass:list';
 
-$spacing-values: (0, 6, 8, 12, 14, 16, 24, 32, 40, 48, 64, 72, 80, 96, 128);
+$spacing-values: (0, 4, 6, 8, 12, 14, 16, 24, 32, 40, 48, 64, 72, 80, 96, 128);
 
 $spacings-desktop: (
   2xs: 12px,

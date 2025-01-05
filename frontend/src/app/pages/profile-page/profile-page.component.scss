@@ -1,0 +1,28 @@
+@use '../../../ui-kit/styles/utility/sizes/sizes' as *;
+
+:host {
+  display: block;
+
+  .plate {
+    box-shadow: var(--soft-shadow);
+
+    background-color: var(--background-accent-color);
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .user {
+    &-plate {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    &-avatar {
+      @include fixed-size(48px);
+
+      object-fit: cover;
+      border-radius: 24px;
+    }
+  }
+}

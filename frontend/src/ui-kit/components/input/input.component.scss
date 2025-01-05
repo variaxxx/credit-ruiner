@@ -1,0 +1,62 @@
+@use '../../styles/utility/typography/typography' as *;
+@use '../../styles/utility/sizes/sizes' as *;
+
+:host {
+  display: block;
+
+  label {
+    .label {
+      @include span-styles;
+      @include span-normal;
+
+      padding-left: 16px;
+      padding-right: 16px;
+
+      color: var(--sidebar-primary-text-color);
+    }
+
+    .input {
+      @include fixed-height(60px);
+      @include span-styles;
+      @include span-normal;
+
+      transition: border-color var(--default-transition), color var(--default-transition), ;
+
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 0 20px 0 20px;
+      border-radius: 12px;
+      width: 100%;
+
+      cursor: text;
+      background-color: var(--black-850);
+      border: .1em solid var(--black-800);
+
+      &:has(input:invalid) {
+        border-color: var(--red-400);
+      }
+
+      &:has(input:active), &:has(input:focus) {
+        border-color: var(--black-100);
+        color: var(--black-100);
+      }
+
+      input {
+        color: var(--black-300);
+        caret-color: white;
+      }
+    }
+
+    .eye-btn {
+      @include fixed-size(20px);
+
+      cursor: pointer;
+      --icon-color: var(--sidebar-secondary-text-color);
+
+      &:hover {
+        --icon-color: var(--sidebar-primary-text-color);
+      }
+    }
+  }
+}

@@ -6,6 +6,10 @@ import {RegistrationPageComponent} from "./pages/auth/registration-page/registra
 import {SidebarComponent} from "./partials/sidebar/sidebar.component";
 import {FooterComponent} from "./partials/footer/footer.component";
 import {AuthLayoutComponent} from "./layouts/auth-layout/auth-layout.component";
+import {AnalysisPageComponent} from "./pages/analysis-page/analysis-page.component";
+import {HomePageComponent} from "./pages/home-page/home-page.component";
+import {ProfilePageComponent} from "./pages/profile-page/profile-page.component";
+import {isNotLoggedGuard} from "./guards/is-not-logged.guard";
 
 export const routes: Routes = [
 	{
@@ -22,8 +26,20 @@ export const routes: Routes = [
 				path: '',
 				outlet: 'footer',
 				component: FooterComponent
+			},
+			{
+				path: '',
+				component: HomePageComponent
+			},
+			{
+				path: 'analysis',
+				component: AnalysisPageComponent
+			},
+			{
+				path: 'profile',
+				component: ProfilePageComponent
 			}
-		]// TODO: fill children
+		]
 	},
 	{
 		path: 'auth',
@@ -33,6 +49,7 @@ export const routes: Routes = [
 	{
 		path: 'auth',
 		component: AuthLayoutComponent,
+		canActivate: [isNotLoggedGuard],
 		children: [
 			{
 				path: 'login',

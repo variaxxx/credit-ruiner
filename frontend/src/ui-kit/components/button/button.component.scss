@@ -4,14 +4,25 @@ app-button {
   button {
     @include span-styles;
     @include span-normal;
+    @include weight-regular;
 
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     border: .2em solid transparent;
     transition: transform var(--default-transition), border-color var(--default-transition), background-color var(--default-transition);
+
+    box-shadow: var(--soft-shadow);
+
+    &[data-type="primary"] {
+      @include weight-medium;
+    }
 
     &[data-size="sm"] {
       padding: 12px 16px 12px 16px;
@@ -25,27 +36,46 @@ app-button {
       padding: 20px 24px 20px 24px;
     }
 
-    &[data-type="primary"] {
-      @include weight-medium;
-
+    &[data-color="white"] {
       background-color: white;
       color: black;
 
       &:enabled:hover {
-        background-color: var(--black-50);
-        border-color: var(--black-150);
+        background-color: var(--black-100);
       }
 
-      &:enabled:focus {
-        border-color: var(--black-150);
+      &:enabled:active {
+        background-color: white;
+        border-color: var(--black-100);
       }
     }
 
-    &[data-type="secondary"] {
-      background-color: var(--black-850);
-      color: white;
+    &[data-color="green"] {
+      background-color: var(--green-250);
+      color: var(--green-700);
 
-      // TODO: primary styles
+      &:enabled:hover {
+        background-color: var(--green-300);
+      }
+
+      &:enabled:active {
+        background-color: var(--green-250);
+        border-color: var(--green-300);
+      }
+    }
+
+    &[data-color="black"] {
+      background-color: var(--black-750);
+      color: var(--black-50);
+
+      &:enabled:hover {
+        background-color: var(--black-800);
+      }
+
+      &:enabled:active {
+        background-color: var(--black-750);
+        border-color: var(--black-800);
+      }
     }
 
     &:enabled:active {

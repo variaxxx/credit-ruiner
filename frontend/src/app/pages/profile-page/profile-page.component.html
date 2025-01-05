@@ -1,0 +1,39 @@
+<div class="row">
+  <h2 class="w-100" style="text-align: center">Информация об аккаунте</h2>
+</div>
+
+<div class="row st-s">
+  <div class="col-lg-6 col-md-6 col-sm-12 flex flex-column gap-8">
+    <div class="plate user-plate">
+      <img
+        src="/assets/images/blank_user.jpg"
+        alt="Avatar"
+        class="user-avatar"
+      >
+
+      <div class="user-info flex flex-column gap-4">
+        <h3> {{ username() }} </h3>
+        <span class="span-big"> {{ email() }} </span>
+      </div>
+    </div>
+
+    <app-button
+      class="w-100"
+      size="md"
+      type="secondary"
+      color="white"
+    >Редактировать</app-button>
+  </div>
+
+  <div class="col-lg-6 col-md-6 col-sm-12 sm:mt-8">
+    <div class="plate">
+      <h3>История</h3>
+
+      @if (analysisHistory) {
+
+      } @else {
+        <span class="span-big">История пуста</span>
+      }
+    </div>
+  </div>
+</div>

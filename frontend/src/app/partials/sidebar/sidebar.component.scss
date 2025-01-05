@@ -1,6 +1,151 @@
+@use '../../../ui-kit/styles/utility/sizes/sizes' as *;
+@use '../../../ui-kit/styles/utility/breakpoints' as *;
+
 :host {
-  display: block;
-  height: 100dvh;
-  width: 300px;
-  background-color: #3ab935;
+  .shadow {
+    transition: opacity var(--smooth-transition);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100dvh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 256px;
+
+    position: fixed;
+    z-index: 300;
+    left: 0;
+    top: 0;
+
+    padding: 16px;
+    background-color: var(--sidebar-background-color);
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    transition: translate var(--smooth-transition);
+
+    @include up-breakpoint(md) {
+      width: 76px;
+    }
+
+    .logo {
+      align-self: flex-start;
+
+      span {
+        color: var(--sidebar-primary-text-color);
+        font-size: 22px;
+      }
+
+      img {
+        height: 44px;
+
+        @include up-breakpoint(md) {
+          width: 44px;
+        }
+      }
+    }
+
+    .menu {
+      &-title {
+        color: var(--sidebar-title-text-color);
+      }
+
+      hr {
+        height: 2px;
+        border-radius: 1px;
+        background-color: var(--sidebar-background-accent-color);
+        margin: 16px 0;
+      }
+
+      app-icon {
+        --icon-size: 20px;
+      }
+
+      &-item {
+        @include fixed-height(48px);
+
+        transition: background-color var(--default-transition), color var(--default-transition);
+        cursor: pointer;
+        border-radius: 6px;
+
+        span {
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          color: var(--sidebar-secondary-text-color);
+        }
+
+        app-icon {
+          position: relative;
+          --icon-color: var(--sidebar-secondary-text-color);
+        }
+
+        &:hover, &.active {
+          background-color: var(--sidebar-background-accent-color);
+
+          span {
+            color: var(--sidebar-primary-text-color);
+          }
+
+          app-icon {
+            --icon-color: var(--accent-green);
+          }
+        }
+      }
+    }
+
+    .user {
+      display: grid;
+      grid-template-columns: 44px 1fr 24px;
+      grid-gap: 12px;
+      align-items: center;
+
+      &-name {
+        color: var(--sidebar-primary-text-color);
+      }
+
+      &-email {
+        color: var(--sidebar-secondary-text-color);
+      }
+
+      @include up-breakpoint(md) {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 12px;
+      }
+
+      &-avatar {
+        @include fixed-size(44px);
+
+        cursor: pointer;
+        border-radius: 22px;
+        object-fit: cover;
+      }
+
+      app-icon {
+        --icon-size: 24px;
+        cursor: pointer;
+      }
+
+      .text-overflow {
+        white-space: nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        scrollbar-width: none;
+        max-width: 132px;
+      }
+    }
+  }
 }

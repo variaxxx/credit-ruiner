@@ -1,5 +1,6 @@
-import {booleanAttribute, Component, HostBinding, Input} from '@angular/core';
+import {booleanAttribute, Component, HostBinding, inject, Input} from '@angular/core';
 import {SafeHtml} from "@angular/platform-browser";
+import {IconService} from "./icon.service";
 
 @Component({
   selector: 'app-icon',
@@ -9,8 +10,15 @@ import {SafeHtml} from "@angular/platform-browser";
   styleUrl: './icon.component.scss'
 })
 export class IconComponent {
-  @Input({required: true}) icon!: string;
+  @HostBinding('class.filled')
   @Input({transform: booleanAttribute}) filled: boolean = false;
+  @Input({required: true}) set icon(value: string) {
+    this._icon = value;
+    this._svg = this.iconService.get(this._icon);
+  }
 
-  @HostBinding('innerHTML') svg!: SafeHtml
+  @HostBinding('innerHTML') _svg?: SafeHtml;
+
+  private _icon?: string;
+  private iconService = inject(IconService);
 }

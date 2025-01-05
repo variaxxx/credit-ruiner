@@ -1,3 +1,32 @@
+@use '../../../ui-kit/styles/utility/breakpoints' as *;
+@use '../../../ui-kit/styles/utility/sizes/sizes' as *;
+
 :host {
-  display: flex;
+  @include fixed-height(100dvh);
+
+  display: block;
+  overflow: hidden;
+
+  .content {
+    @include fixed-height(calc(100dvh - 32px));
+    margin: 16px 16px 16px 272px;
+    padding: 16px;
+
+    background-color: var(--background-color);
+    border: 1px solid rgb(255, 255, 255, .1);
+    border-radius: 16px;
+
+    overflow-y: scroll;
+
+    @include min-max-breakpoint(sm, md) {
+      margin-left: 76px;
+    }
+
+    @include up-breakpoint(sm) {
+      min-height: 100dvh;
+      margin: 0;
+      border-radius: unset;
+      border: none;
+    }
+  }
 }

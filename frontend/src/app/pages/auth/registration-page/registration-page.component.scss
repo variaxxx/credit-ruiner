@@ -3,7 +3,6 @@
 app-registration-page {
   display: block;
   height: calc(100dvh - 66px);
-  //animation: page-show .2s ease-in-out forwards;
 
   .login-form {
     position: relative;
@@ -58,14 +57,6 @@ app-registration-page {
   }
 }
 
-@keyframes page-show {
-  from {
-    transform: translateY(40px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.registration-alert {
+  --icon-size: 16px;
 }
