@@ -10,6 +10,7 @@ import {AnalysisPageComponent} from "./pages/analysis-page/analysis-page.compone
 import {HomePageComponent} from "./pages/home-page/home-page.component";
 import {ProfilePageComponent} from "./pages/profile-page/profile-page.component";
 import {isNotLoggedGuard} from "./guards/is-not-logged.guard";
+import {WelcomePageComponent} from "./pages/welcome-page/welcome-page.component";
 
 export const routes: Routes = [
 	{
@@ -40,6 +41,11 @@ export const routes: Routes = [
 				component: ProfilePageComponent
 			}
 		]
+	},
+	{
+		path: 'welcome',
+		component: WelcomePageComponent,
+		canActivate: [isNotLoggedGuard]
 	},
 	{
 		path: 'auth',

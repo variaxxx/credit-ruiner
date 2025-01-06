@@ -1,0 +1,20 @@
+<app-icon icon="logo" filled class="welcome-logo"></app-icon>
+
+<div class="container-fluid h-100 position-relative">
+  <div class="row h-100 py-96">
+    <div class="col-lg-6 col-md-6 col-sm-12 h-100 flex">
+      <div class="flex flex-column align-items-center justify-content-center welcome-wrapper">
+        <h1 class="welcome-header">Добро пожаловать</h1>
+        <p class="text-big st-m welcome-description">Мы здесь, чтобы помочь вам сделать уверенный шаг к финансовой свободе. Узнайте, насколько высоки ваши шансы на получение кредита, и получите полезные рекомендации для их улучшения. Всё просто, быстро и удобно!</p>
+        <app-button size="lg" type="primary" color="white" class="welcome-btn st-m" [routerLink]="['/auth/register']">Начать пользоваться</app-button>
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 sm:none welcome-img-wrapper">
+      <img src="assets/images/bank.png" class="welcome-img">
+    </div>
+  </div>
+
+  <img src="assets/images/bank.png" class="welcome-img-mobile none sm:block">
+</div>
+

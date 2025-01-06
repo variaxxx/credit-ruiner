@@ -24,8 +24,7 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 	],
 	templateUrl: './login-page.component.html',
 	styleUrl: './login-page.component.scss',
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	encapsulation: ViewEncapsulation.None
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPageComponent {
 	private router = inject(Router);

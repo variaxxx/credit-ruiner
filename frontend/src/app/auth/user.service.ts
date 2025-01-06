@@ -94,7 +94,7 @@ export class UserService {
     this.token = null;
     this.refresh_token = null;
     this.user.next(null);
-    this.router.navigateByUrl('/auth/login');
+    this.router.navigateByUrl('/welcome');
   }
 
   /**

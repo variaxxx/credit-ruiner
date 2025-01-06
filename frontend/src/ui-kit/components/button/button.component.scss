@@ -1,6 +1,8 @@
 @use '../../../ui-kit/styles/utility/typography/typography' as *;
 
 app-button {
+  display: block;
+
   button {
     @include span-styles;
     @include span-normal;

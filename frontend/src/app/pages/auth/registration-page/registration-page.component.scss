@@ -1,8 +1,9 @@
 @use '../../../../ui-kit/styles/utility/typography/typography' as *;
 
-app-registration-page {
+:host {
   display: block;
-  height: calc(100dvh - 66px);
+  min-height: calc(100dvh - 66px);
+  height: 640px;
 
   .login-form {
     position: relative;
@@ -26,37 +27,7 @@ app-registration-page {
     font-size: min(50px, calc(100dvw / 11));
   }
 
-  .input {
-    @include span-styles;
-    @include span-normal;
-
-    transition: border-color var(--default-transition), color var(--default-transition), ;
-
-    padding: 20px;
-    border-radius: 12px;
-    width: 100%;
-    background-color: var(--black-850);
-    color: var(--black-300);
-    border: .1em solid var(--black-800);
-    caret-color: white;
-
-    &:invalid {
-      border-color: var(--red-400);
-    }
-
-    &:active, &:focus {
-      border-color: var(--black-100);
-      color: var(--black-100);
-    }
+  .registration-alert {
+    --icon-size: 16px;
   }
-
-  .confirm-btn {
-    button {
-      min-width: 100%;
-    }
-  }
-}
-
-.registration-alert {
-  --icon-size: 16px;
 }

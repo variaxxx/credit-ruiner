@@ -1,17 +1,26 @@
 <ul
   class="flex nav-wrapper"
 >
-  <li
-    class="nav-item"
-    [class.active]="isLogin"
-    [routerLink]="['/auth/login']"
-    (click)="isLogin = true"
-  >Вход</li>
+  @for (navbarItem of navbarItems; track $index) {
+    <li
+      class="nav-item"
+      [class.active]="isActive(navbarItem.url)"
+      [routerLink]="[navbarItem.url]"
+    >
+      {{ navbarItem.label }}
+    </li>
+  }
+<!--  <li-->
+<!--    class="nav-item"-->
+<!--    [class.active]="isLogin"-->
+<!--    [routerLink]="['/auth/login']"-->
+<!--    (click)="isLogin = true"-->
+<!--  >Вход</li>-->
 
-  <li
-    class="nav-item"
-    [class.active]="!isLogin"
-    [routerLink]="['/auth/register']"
-    (click)="isLogin = false"
-  >Регистрация</li>
+<!--  <li-->
+<!--    class="nav-item"-->
+<!--    [class.active]="!isLogin"-->
+<!--    [routerLink]="['/auth/register']"-->
+<!--    (click)="isLogin = false"-->
+<!--  >Регистрация</li>-->
 </ul>

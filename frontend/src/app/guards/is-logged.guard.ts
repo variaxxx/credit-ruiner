@@ -4,5 +4,5 @@ import {UserService} from "../auth/user.service";
 
 export const isLoggedGuard: CanActivateFn = (route, state) => {
 	if (inject(UserService).isUserLoggedIn) return true;
-	return inject(Router).navigateByUrl('/auth/login');
+	return inject(Router).navigateByUrl('/welcome');
 }

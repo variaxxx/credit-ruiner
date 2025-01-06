@@ -42,8 +42,7 @@ export const passwordValidator: ValidatorFn = (control: AbstractControl): Valida
 	],
 	templateUrl: './registration-page.component.html',
 	styleUrl: './registration-page.component.scss',
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	encapsulation: ViewEncapsulation.None
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegistrationPageComponent {
 	private userService = inject(UserService);

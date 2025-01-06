@@ -1,6 +1,11 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 
+export interface AuthNavbarItem {
+	label: string,
+	url: string
+}
+
 @Component({
 	selector: 'app-auth-navbar',
 	imports: [
@@ -13,5 +18,22 @@ import {Router, RouterLink} from "@angular/router";
 export class AuthNavbarComponent {
 	private router = inject(Router);
 
-	public isLogin = this.router.url === '/auth/login';
+	protected readonly navbarItems: AuthNavbarItem[] = [
+		{
+			label: 'Главная',
+			url: '/welcome',
+		},
+		{
+			label: 'Вход',
+			url: '/auth/login'
+		},
+		{
+			label: 'Регистрация',
+			url: '/auth/register'
+		}
+	]
+
+	protected isActive(currentRoute: string) {
+		return this.router.url.endsWith(currentRoute);
+	}
 }

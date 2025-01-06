@@ -1,7 +1,7 @@
 @use '../../../../ui-kit/styles/utility/typography/typography' as *;
 @use '../../../../ui-kit/styles/utility/sizes/sizes' as *;
 
-app-login-page {
+:host {
   display: block;
   height: calc(100dvh - 66px);
 
@@ -27,15 +27,8 @@ app-login-page {
     font-size: 100px;
   }
 
-
-
-  .confirm-btn {
-    button {
-      min-width: 100%;
-    }
+  .registration-alert {
+    --icon-size: 16px;
   }
 }
 
-.registration-alert {
-  --icon-size: 16px;
-}

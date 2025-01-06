@@ -3,7 +3,7 @@
 
 @layer utility {
   :host {
-    transition: var(--default-transition);
+    transition: fill var(--default-transition), stroke var(--default-transition);
     display: block;
 
     --icon-size: 24px;
