@@ -9,7 +9,7 @@ import {
 import {IconComponent} from "../../../ui-kit/components/icon/icon.component";
 import {Router, RouterLink} from "@angular/router";
 import {NavigationService} from "../../services/navigation.service";
-import {UserService} from "../../auth/user.service";
+import {UserService} from "../../services/user.service";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
@@ -54,11 +54,6 @@ export class SidebarComponent implements OnInit {
             label: 'История',
             icon: 'history',
             url: '/history'
-        },
-        {
-            label: 'Настройки',
-            icon: 'settings',
-            url: '/settings'
         }
     ]
     public menuTranslate = this.navigationService.hideSidebar.value ? '-80px' : '0'
@@ -97,7 +92,7 @@ export class SidebarComponent implements OnInit {
               });
         }
 
-        this.userService.userObservable()
+        this.userService.$user
           .pipe(takeUntilDestroyed(this.destroyRef))
           .subscribe(value => {
               this.username.set(value?.name);

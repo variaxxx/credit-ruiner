@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@angular/core';
+import {booleanAttribute, ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@angular/core';
 
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonColor = 'white' | 'green' | 'black';
@@ -16,4 +16,5 @@ export class ButtonComponent {
   @Input() size: ButtonSize = 'md';
   @Input() color: ButtonColor = 'white';
   @Input() type: ButtonType = 'secondary';
+  @Input({transform: booleanAttribute}) submit: boolean = false;
 }

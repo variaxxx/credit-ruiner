@@ -3,26 +3,119 @@
 :host {
   display: block;
 
+  .banner {
+    width: 100%;
+    border-radius: 18px;
+    height: 196px;
+    object-fit: cover;
+  }
+
+  .secondary {
+    color: var(--secondary-text-color);
+  }
+
+  .primary {
+    color: var(--primary-text-color);
+  }
+
   .plate {
     box-shadow: var(--soft-shadow);
 
     background-color: var(--background-accent-color);
     padding: 16px;
-    border-radius: 12px;
+    border-radius: 18px;
+  }
+
+  .text-overflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .user {
-    &-plate {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
     &-avatar {
-      @include fixed-size(48px);
+      @include fixed-size(64px);
 
       object-fit: cover;
-      border-radius: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--black-100);
     }
+  }
+
+  .analysis {
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    &-item {
+      background-color: var(--background-color);
+      padding: 12px;
+      border-radius: 18px;
+      border: 2px solid transparent;
+      transition: var(--default-transition);
+
+      &:hover {
+        border-color: var(--black-100);
+      }
+
+      .name {
+        color: var(--secondary-text-color);
+      }
+    }
+
+    &-icon {
+      &-success, &-deny {
+        app-icon {
+          --icon-color: var(--background-accent-color);
+        }
+        padding: 8px;
+        border-radius: 6px;
+
+        app-icon {
+          --icon-size: 24px;
+        }
+      }
+
+      &-success {
+        background-color: var(--green-250);
+      }
+
+      &-deny {
+        background-color: var(--red-250);
+      }
+    }
+
+    &-history {
+      color: var(--secondary-text-color);
+      transition: var(--default-transition);
+
+      &:hover {
+        color: var(--primary-text-color);
+      }
+    }
+  }
+
+  .edit-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    position: fixed;
+    z-index: 400;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
+
+  .shadow {
+    transition: opacity var(--smooth-transition);
+    position: fixed;
+    z-index: 399;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
   }
 }

@@ -20,8 +20,6 @@ app-button {
     border: .2em solid transparent;
     transition: transform var(--default-transition), border-color var(--default-transition), background-color var(--default-transition);
 
-    box-shadow: var(--soft-shadow);
-
     &[data-type="primary"] {
       @include weight-medium;
     }
@@ -39,6 +37,10 @@ app-button {
     }
 
     &[data-color="white"] {
+
+      border-width: 2px;
+      border-color: var(--black-100);
+
       background-color: white;
       color: black;
 
@@ -48,7 +50,6 @@ app-button {
 
       &:enabled:active {
         background-color: white;
-        border-color: var(--black-100);
       }
     }
 
@@ -67,15 +68,15 @@ app-button {
     }
 
     &[data-color="black"] {
-      background-color: var(--black-750);
+      background-color: var(--sidebar-background-color);
       color: var(--black-50);
 
       &:enabled:hover {
-        background-color: var(--black-800);
+        background-color: var(--sidebar-background-accent-color);
       }
 
       &:enabled:active {
-        background-color: var(--black-750);
+        background-color: var(--sidebar-background-color);
         border-color: var(--black-800);
       }
     }

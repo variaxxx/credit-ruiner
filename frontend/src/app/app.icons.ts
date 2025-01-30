@@ -12,7 +12,12 @@ const icons: readonly string[] = [
 	'menu-closed',
 	'logo',
 	'eye-off',
-	'eye'
+	'eye',
+	'slash',
+	'alert-triangle',
+	'check-check',
+	'info',
+	'x'
 ]
 
 export const iconsConfig: IconsConfig = {

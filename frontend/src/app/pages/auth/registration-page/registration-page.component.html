@@ -40,12 +40,14 @@
           autocomplete="new-password"
           [control]="getControl('password')"
           [required]="registerForm.controls['password'].invalid && !registerForm.controls['password'].untouched"
+          (eyeClicked)="hidePassword = $event"
         ></app-input>
 
         <app-input
           class="w-100 st-s"
+          [type]="hidePassword ? 'password' : 'text'"
           label="Подтверждение пароля"
-          name="password_confirmation"
+          name="password-confirmation"
           placeholder="Повторите пароль"
           autocomplete="new-password"
           [control]="getControl('password_confirmation')"
@@ -62,6 +64,7 @@
         }
 
         <app-button
+          submit
           class="st-s confirm-btn w-100"
           size="lg"
           color="white"

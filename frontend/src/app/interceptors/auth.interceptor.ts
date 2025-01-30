@@ -1,17 +1,19 @@
 import {HttpHandlerFn, HttpInterceptorFn, HttpRequest} from "@angular/common/http";
 import {inject} from "@angular/core";
-import {UserService} from "../auth/user.service";
-import {catchError, switchMap, throwError} from "rxjs";
+import {UserService} from "../services/user.service";
+import {BehaviorSubject, catchError, filter, switchMap, tap, throwError} from "rxjs";
+import {NotificationService} from "../services/notification.service";
 
-let isRefreshing = false;
+let isRefreshing$ = new BehaviorSubject<boolean>(false);
 
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
 	const userService = inject(UserService);
+	const notificationService = inject(NotificationService);
 	const token = userService.token;
 
 	if (!token) return next(req);
 
-	if (isRefreshing) return refreshAndProceed(userService, req, next);
+	if (isRefreshing$.value) return refreshAndProceed(userService, req, next);
 
 	return next(addToken(req, token))
 		.pipe(
@@ -20,29 +22,44 @@ export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
 					return refreshAndProceed(userService, req, next);
 				}
 
+				if (err.status != 403) {
+					notificationService.throwError('Что-то пошло не так, повторите попытку позже.')
+				} else {
+					notificationService.throwError('У вас нет доступа.')
+				}
+
 				return throwError(err);
 			})
 		)
 }
 
 const refreshAndProceed = (userService: UserService, req: HttpRequest<any>, next: HttpHandlerFn) => {
-	if (!isRefreshing) {
-		isRefreshing = true;
+	if (!isRefreshing$.value) {
+		isRefreshing$.next(true);
 
 		return userService.refreshAuthToken()
 			.pipe(
 				switchMap((value) => {
-					isRefreshing = false;
-					return next(addToken(req, value.access_token));
+					return next(addToken(req, value.access_token))
+						.pipe(
+							tap(() => isRefreshing$.next(false)),
+						)
 				}),
 				catchError(err => {
-					isRefreshing = false;
+					isRefreshing$.next(false);
 					return throwError(() => err);
 				})
 			)
 	}
 
-	return next(addToken(req, userService.refresh_token!));
+	if (req.url.includes('refresh')) return next(addToken(req, userService.refresh_token!));
+
+	return isRefreshing$.pipe(
+		filter(isRefreshing => !isRefreshing),
+		switchMap(res => {
+			return next(addToken(req, userService.token!));
+		})
+	)
 }
 
 const addToken = (req: HttpRequest<any>, token: string) => {

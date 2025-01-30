@@ -17,7 +17,7 @@ import {
 	Validators
 } from "@angular/forms";
 import {IconComponent} from "../../../../ui-kit/components/icon/icon.component";
-import {UserModel, UserService} from "../../../auth/user.service";
+import {UserModel, UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
 import {InputComponent} from "../../../../ui-kit/components/input/input.component";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
@@ -50,7 +50,7 @@ export class RegistrationPageComponent {
 	private router = inject(Router);
 	private destroyRef = inject(DestroyRef);
 
-	public registerForm = new FormGroup({
+	protected registerForm = new FormGroup({
 			name: new FormControl('', [Validators.required, Validators.maxLength(80)]),
 			email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(80)]),
 			password: new FormControl('', [Validators.required, passwordValidator, Validators.minLength(6), Validators.maxLength(120)]),
@@ -61,10 +61,11 @@ export class RegistrationPageComponent {
 		}
 	)
 
-	public clientError: string | null = null;
-	public serverError: string | null = null;
+	protected clientError: string | null = null;
+	protected serverError: string | null = null;
+	protected hidePassword: boolean = true;
 
-	public register() {
+	protected register() {
 		this.serverError = null;
 		this.clientError = null;
 		if (this.registerForm.valid) {
@@ -77,7 +78,7 @@ export class RegistrationPageComponent {
 				.pipe(takeUntilDestroyed(this.destroyRef))
 				.subscribe({
 					next: value => {
-						this.router.navigateByUrl('/auth/login');
+						this.router.navigateByUrl('/');
 						console.log('Successfully registered!');
 					},
 					error: err => {

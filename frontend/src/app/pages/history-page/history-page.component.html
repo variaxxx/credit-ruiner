@@ -1,0 +1,118 @@
+<div class="row h-100">
+  <div class="col-lg-12 col-md-12 col-sm-12 flex flex-column">
+    @if (history()?.count != 0) {
+      <div class="flex align-items-center justify-content-between px-16">
+        <h2>История</h2>
+        <app-button size="md" color="black" [routerLink]="['..', 'analysis']">Новый анализ</app-button>
+      </div>
+    }
+
+    <div
+      class="analysis-wrapper"
+      [style.margin-top]="history()?.count ? '-12px' : '0'"
+    >
+      @if (isFetching()) {
+        <div class="row">
+          @for (item of [0, 1, 2, 3, 4, 5]; track $index) {
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div
+                class="analysis-item mt-12"
+              >
+                <ngx-skeleton-loader
+                  [theme]="{
+                    height: '96px',
+                    margin: '0',
+                    zIndex: '1'
+                  }"
+                ></ngx-skeleton-loader>
+
+                <div class="flex flex-column px-24">
+                  <div class="flex justify-content-between align-items-center gap-8 w-100 st-s">
+                    <ngx-skeleton-loader
+                      [theme]="{
+                        height: '16px',
+                        width: '30px',
+                        margin: '0'
+                      }"
+                    ></ngx-skeleton-loader>
+                    <ngx-skeleton-loader
+                      [theme]="{
+                        height: '16px',
+                        width: '70px',
+                        margin: '0'
+                      }"
+                    ></ngx-skeleton-loader>
+                  </div>
+                  <ngx-skeleton-loader
+                    class="st-xs"
+                    [theme]="{
+                        height: '16px',
+                        width: '100%',
+                        margin: '0'
+                      }"
+                  ></ngx-skeleton-loader>
+                  <ngx-skeleton-loader
+                    class="st-2xs sb-s"
+                    [theme]="{
+                        height: '16px',
+                        width: '50%',
+                        margin: '0'
+                      }"
+                  ></ngx-skeleton-loader>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      } @else {
+        @if (history()?.count == 0) {
+          <div class="empty">
+            <img src="assets/images/cry-emoji.png" alt="sad">
+            <h3 class="st-s">Упс...</h3>
+            <span class="span-big st-2xs">Ваша история пуста</span>
+            <app-button class="st-xs" size="lg" color="black" [routerLink]="['..', 'analysis']">Новый анализ</app-button>
+          </div>
+        } @else {
+          <div class="row">
+            @for (analysis of history()?.items; track $index) {
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div
+                  class="analysis-item mt-12"
+                  [routerLink]="[analysis.id]"
+                >
+                  <img [src]="analysis.loan_status ? '/assets/images/history-accepted.png' : '/assets/images/history-denied.png'" alt="img" style="object-fit: cover; height: 96px;">
+                  <div class="flex flex-column px-24">
+                    <div class="flex justify-content-between align-items-center gap-8 w-100 st-s">
+                      <span class="span-big medium">{{analysis.name}}</span>
+                      <span class="span-small secondary">{{analysis.date | date}}</span>
+                    </div>
+                    <span class="span-normal secondary st-xs">Предполагаемый результат: {{ analysis.loan_status ? 'Успех' : 'Отказ' }}</span>
+                    <span class="span-normal secondary st-2xs sb-s">Шанс выдачи: {{ analysis.success_percentage }}%</span>
+                  </div>
+                </div>
+              </div>
+            }
+
+            <div class="col-lg-12 col-md-12 col-sm-12 st-s">
+              <div class="flex align-items-center justify-content-center gap-8">
+                @if (!isFirstPage()) {
+                  <div class="nav-item" (click)="prevPage()">
+                    <span class="span-big">{{ currentPage.value - 1 }}</span>
+                  </div>
+                }
+                <div class="nav-item current">
+                  <span class="span-big">{{ currentPage.value }}</span>
+                </div>
+                @if (!isLastPage()) {
+                  <div class="nav-item" (click)="nextPage()">
+                    <span class="span-big">{{ currentPage.value + 1 }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

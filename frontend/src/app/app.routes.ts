@@ -11,6 +11,8 @@ import {HomePageComponent} from "./pages/home-page/home-page.component";
 import {ProfilePageComponent} from "./pages/profile-page/profile-page.component";
 import {isNotLoggedGuard} from "./guards/is-not-logged.guard";
 import {WelcomePageComponent} from "./pages/welcome-page/welcome-page.component";
+import {HistoryPageComponent} from "./pages/history-page/history-page.component";
+import {AnalysisInfoPageComponent} from "./pages/history-page/analysis-info-page/analysis-info-page.component";
 
 export const routes: Routes = [
 	{
@@ -30,22 +32,36 @@ export const routes: Routes = [
 			},
 			{
 				path: '',
-				component: HomePageComponent
+				component: HomePageComponent,
+				title: 'Домашняя страница | CreditRuiner'
 			},
 			{
 				path: 'analysis',
-				component: AnalysisPageComponent
+				component: AnalysisPageComponent,
+				title: 'Анализ кредитоспособности | CreditRuiner'
 			},
 			{
 				path: 'profile',
-				component: ProfilePageComponent
+				component: ProfilePageComponent,
+				title: 'Мой профиль | CreditRuiner'
+			},
+			{
+				path: 'history',
+				component: HistoryPageComponent,
+				title: 'smth'
+			},
+			{
+				path: 'history/:id',
+				component: AnalysisInfoPageComponent,
+				title: 'smth'
 			}
 		]
 	},
 	{
 		path: 'welcome',
 		component: WelcomePageComponent,
-		canActivate: [isNotLoggedGuard]
+		canActivate: [isNotLoggedGuard],
+		title: 'Ваш путь к финансовой свободе | CreditRuiner'
 	},
 	{
 		path: 'auth',
@@ -60,10 +76,12 @@ export const routes: Routes = [
 			{
 				path: 'login',
 				component: LoginPageComponent,
+				title: 'Вход в аккаунт | CreditRuiner'
 			},
 			{
 				path: 'register',
-				component: RegistrationPageComponent
+				component: RegistrationPageComponent,
+				title: 'Регистрация нового пользователя | CreditRuiner'
 			}
 		]
 	}

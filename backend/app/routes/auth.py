@@ -29,7 +29,10 @@ def register():
     db.session.add(user)
     db.session.commit()
 
-    return jsonify(msg='User created successfully'), 201
+    access_token = create_access_token(identity=email)
+    refresh_token = create_refresh_token(identity=email)
+
+    return jsonify({'access_token': access_token, 'refresh_token': refresh_token}), 201
 
 
 @auth_bp.route('/login', methods=['POST'])

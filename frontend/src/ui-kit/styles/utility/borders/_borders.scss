@@ -2,7 +2,7 @@
 @use '../../utility/colors/colors' as *;
 @use 'sass:list';
 
-$border-radius-values: (0, 6, 8, 12, 18, 24, 30, 32, 36, 40, 48, 64, 80, 96, 112);
+$border-radius-values: (0, 6, 8, 12, 18, 20, 24, 30, 32, 36, 40, 48, 64, 80, 96, 112);
 $border-styles: (dotted, dashed, solid, double);
 
 @mixin border-radius($breakpoint) {

@@ -10,7 +10,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {ButtonComponent} from "../../../../ui-kit/components/button/button.component";
 import {IconComponent} from "../../../../ui-kit/components/icon/icon.component";
 import {Router} from "@angular/router";
-import {UserService} from "../../../auth/user.service";
+import {UserService} from "../../../services/user.service";
 import {InputComponent} from "../../../../ui-kit/components/input/input.component";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 

@@ -1,4 +1,4 @@
-import {booleanAttribute, ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {IconComponent} from "../icon/icon.component";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 
@@ -21,6 +21,9 @@ export class InputComponent {
   @Input({required: true}) required!: boolean;
   @Input({required: true}) placeholder!: string;
   @Input({required: true}) autocomplete!: string;
+  @Input({transform: booleanAttribute}) light: boolean = false;
+
+  @Output() eyeClicked = new EventEmitter();
 
   protected hideInput: boolean = true;
 
@@ -29,5 +32,10 @@ export class InputComponent {
       return this.hideInput ? 'password' : 'text';
     }
     return this.type;
+  }
+
+  protected eyeTriggered() {
+    this.hideInput = !this.hideInput;
+    this.eyeClicked.emit(this.hideInput);
   }
 }

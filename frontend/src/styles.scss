@@ -3,8 +3,10 @@ html, body {
   background-color: var(--sidebar-background-color);
 }
 
+// TODO: edit selection
+
 *::selection {
-  background-color: var(--accent-green);
+  background-color: var(--green-200);
   color: var(--black-750);
 }
 
@@ -16,7 +18,7 @@ div {
 //VARIABLES
 
 :root {
-  --soft-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  --soft-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;;
   --accent-green: var(--green-250);
   --sidebar-primary-text-color: var(--black-50);
   --sidebar-secondary-text-color: var(--black-250);
@@ -26,6 +28,8 @@ div {
   --background-color: var(--black-50);
   --background-accent-color: var(--white-1000);
   --default-icon-color: var(--black-50);
+  --primary-text-color: var(--black-950);
+  --secondary-text-color: var(--black-700);
   --scrollbar-color: var(--black-800);
   --auth-background-color: var(--black-1000);
 }

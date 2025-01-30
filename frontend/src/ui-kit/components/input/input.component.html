@@ -1,6 +1,7 @@
 <label
   class="w-100"
   [style.position]="showEye ? 'relative' : 'auto'"
+  [attr.data-light]="light"
 >
   <span class="label">{{ label }}</span>
 
@@ -18,7 +19,7 @@
     @if (showEye) {
       <app-icon
         [icon]="hideInput ? 'eye-off' : 'eye'"
-        (click)="hideInput = !hideInput"
+        (click)="eyeTriggered()"
         class="eye-btn"
       ></app-icon>
     }

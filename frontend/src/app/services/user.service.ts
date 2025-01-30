@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, Observable, tap, throwError} from "rxjs";
+import {BehaviorSubject, catchError, Observable, switchMap, tap, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environments} from "../../environments/environments";
 import {CookieService} from "ngx-cookie-service";
@@ -31,6 +31,11 @@ export interface UserData {
   email: string;
 }
 
+export interface EditProfileData {
+  name?: string,
+  email?: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -42,10 +47,7 @@ export class UserService {
   public token: string | null = null;
   public refresh_token: string | null = null;
   private user = new BehaviorSubject<UserData | null>(null);
-
-  public userObservable() {
-    return this.user.asObservable();
-  }
+  public $user = this.user.asObservable();
 
   /**
    * Выполняет авторизацию пользователя.
@@ -77,8 +79,11 @@ export class UserService {
     fd.append('email', info.email);
     fd.append('password', info.password);
 
-    return this.http.post<void>(`${environments.apiBaseUrl}/auth/register`, fd)
+    return this.http.post<TokenResponse>(`${environments.apiBaseUrl}/auth/register`, fd)
       .pipe(
+        tap(value => {
+          this.saveTokens(value);
+        }),
         catchError(err => {
           throw err;
         })
@@ -171,6 +176,31 @@ export class UserService {
         }),
         catchError(err => {
           throw new Error('Error fetching user info');
+        })
+      )
+  }
+
+  /**
+   * Изменяет информацию о пользователе. Принимает в себя объект с полями name и email.
+   * @returns {Observable<UserData>} Observable с данными пользователя.
+   */
+  public editProfile(data: EditProfileData) {
+    const fd = new FormData();
+    if (data.name) {
+      fd.append('name', data.name);
+    }
+    if (data.email) {
+      fd.append('email', data.email);
+    }
+
+    return this.http.patch<UserData>(`${environments.apiBaseUrl}/account/me/edit`, fd)
+      .pipe(
+        tap(value => {
+          this.user.next(value);
+          console.log('Successfully edited user info.')
+        }),
+        catchError(err => {
+          throw new Error('Error while trying to edit profile info');
         })
       )
   }

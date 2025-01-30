@@ -5,6 +5,24 @@
   display: block;
 
   label {
+    &[data-light="false"] {
+      --input-primary-text-color: var(--sidebar-primary-text-color);
+      --input-secondary-text-color: var(--sidebar-secondary-text-color);
+      --input-bg-color: var(--sidebar-background-color);
+      --input-bg-accent-color: var(--sidebar-background-accent-color);
+      --input-border-color: var(--black-800);
+      --input-caret-color: white;
+    }
+
+    &[data-light="true"] {
+      --input-primary-text-color: var(--primary-text-color);
+      --input-secondary-text-color: var(--secondary-text-color);
+      --input-bg-color: var(--background-color);
+      --input-bg-accent-color: var(--background-accent-color);
+      --input-border-color: var(--black-100);
+      --input-caret-color: black;
+    }
+
     .label {
       @include span-styles;
       @include span-normal;
@@ -12,7 +30,7 @@
       padding-left: 16px;
       padding-right: 16px;
 
-      color: var(--sidebar-primary-text-color);
+      color: var(--input-primary-text-color);
     }
 
     .input {
@@ -30,21 +48,23 @@
       width: 100%;
 
       cursor: text;
-      background-color: var(--black-850);
-      border: .1em solid var(--black-800);
+      background-color: var(--input-bg-accent-color);
+      border: 2px solid var(--input-border-color);
 
       &:has(input:invalid) {
         border-color: var(--red-400);
       }
 
       &:has(input:active), &:has(input:focus) {
-        border-color: var(--black-100);
-        color: var(--black-100);
+        border-color: var(--input-primary-text-color);
+        input {
+          color: var(--input-primary-text-color);
+        }
       }
 
       input {
-        color: var(--black-300);
-        caret-color: white;
+        color: var(--input-secondary-text-color);
+        caret-color: var(--input-caret-color);
       }
     }
 
@@ -52,10 +72,10 @@
       @include fixed-size(20px);
 
       cursor: pointer;
-      --icon-color: var(--sidebar-secondary-text-color);
+      --icon-color: var(--input-secondary-text-color);
 
       &:hover {
-        --icon-color: var(--sidebar-primary-text-color);
+        --icon-color: var(--input-primary-text-color);
       }
     }
   }

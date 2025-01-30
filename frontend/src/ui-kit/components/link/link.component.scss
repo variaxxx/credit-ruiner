@@ -1,0 +1,15 @@
+@use '../../styles/utility/typography/typography' as *;
+
+app-link {
+  a {
+    @include span-styles;
+    @include span-normal;
+
+    transition: color var(--default-transition);
+    color: var(--primary-text-color);
+
+    &:hover {
+      color: var(--accent-green);
+    }
+  }
+}

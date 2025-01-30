@@ -1,0 +1,105 @@
+@use '../../../ui-kit/styles/utility/sizes/sizes' as *;
+
+:host {
+  &[data-type="error"] {
+    --bg-color: var(--red-50);
+    --primary-color: var(--red-400);
+  }
+
+  &[data-type="warning"] {
+    --bg-color: var(--orange-50);
+    --primary-color: var(--orange-400);
+  }
+
+  &[data-type="info"] {
+    --bg-color: var(--blue-50);
+    --primary-color: var(--blue-400);
+  }
+
+  &[data-type="success"] {
+    --bg-color: var(--green-50);
+    --primary-color: var(--green-400);
+  }
+
+  position: fixed;
+  z-index: 100;
+  bottom: 8px;
+  display: flex;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 8px;
+
+  padding: 12px;
+  border-radius: 18px;
+  overflow-x: hidden;
+
+  min-width: 256px;
+  max-width: 50dvw;
+
+  animation: notification 5s cubic-bezier(0.68, -0.55, 0.265, 1.35) forwards;
+
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 3px;
+    width: 100%;
+    background-color: var(--primary-color);
+    animation: progress 5s linear forwards;
+  }
+
+  background-color: var(--bg-color);
+
+  .icon-wrapper {
+    @include fixed-size(40px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white-1000);
+    border-radius: 6px;
+
+    app-icon {
+      --icon-color: var(--primary-color);
+      --icon-size: 24px;
+    }
+  }
+
+  .title {
+    color: var(--primary-text-color);
+  }
+
+  .description {
+    color: var(--secondary-text-color);
+  }
+}
+
+@keyframes notification {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100%);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100%);
+  }
+}
+
+@keyframes progress {
+  100% {
+    right: 100%;
+  }
+}
