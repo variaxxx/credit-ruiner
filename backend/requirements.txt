@@ -4,3 +4,7 @@ flask_sqlalchemy
 flask_marshmallow
 flask_cors
 marshmallow-sqlalchemy
+joblib
+pandas
+numpy
+scikit-learn

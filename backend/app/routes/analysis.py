@@ -5,6 +5,11 @@ from marshmallow import ValidationError
 from app.models.user import User
 from app.extensions import db
 from datetime import datetime
+import joblib
+import pandas as pd
+import sklearn
+import numpy
+
 
 analysis_bp = Blueprint('analysis', __name__)
 
@@ -50,33 +55,35 @@ def analysis_history():
 @analysis_bp.route('/', methods=['POST'])
 @jwt_required()
 def do_analysis():
-	user_email = get_jwt_identity()
-	user_id = User.query.filter_by(email=user_email).first().id
+    user_email = get_jwt_identity()
+    user_id = User.query.filter_by(email=user_email).first().id
 
-	data = request.form.to_dict()
+    data = request.form.to_dict()
+    date = datetime.now()
+    credit_data = pd.DataFrame(data)
+    credit_data = credit_data.drop(['user_id', 'name'], axis=1)
+    credit_data = pd.get_dummies(credit_data)
 
-	date = datetime.now()
+    # TODO: calculate result and success_percentage
+    loan_status = 0
+    success_percentage = 52
 
-	# TODO: calculate result and success_percentage
-	loan_status = 0
-	success_percentage = 52
+    data['user_id'] = user_id
+    data['date'] = str(date)
+    data['success_percentage'] = str(success_percentage)
+    data['loan_status'] = str(loan_status)
 
-	data['user_id'] = user_id
-	data['date'] = str(date)
-	data['success_percentage'] = str(success_percentage)
-	data['loan_status'] = str(loan_status)
+    try:
+      analysis_data = analysis_schema.load(data)
 
-	try:
-		analysis_data = analysis_schema.load(data)
+      analysis = Analysis(**analysis_data)
 
-		analysis = Analysis(**analysis_data)
+      db.session.add(analysis)
+      db.session.commit()
 
-		db.session.add(analysis)
-		db.session.commit()
-
-		return jsonify(msg='Success'), 200
-	except ValidationError as err:
-		return jsonify(msg=err.messages), 400
+      return jsonify(msg='Success'), 200
+    except ValidationError as err:
+      return jsonify(msg=err.messages), 400
 
 
 @analysis_bp.route('/history/<id>', methods=['DELETE'])
