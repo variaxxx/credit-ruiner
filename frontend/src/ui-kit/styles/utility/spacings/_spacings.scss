@@ -43,6 +43,10 @@ $bi-directions: (
 @mixin margin($breakpoint) {
   $breakpoint-infix: breakpoint-infix($breakpoint);
 
+  .#{$breakpoint-infix}m-auto {
+    margin: auto;
+  }
+
   @each $spacing-value in $spacing-values {
     .#{$breakpoint-infix}m-#{$spacing-value} {
       margin: #{$spacing-value}px;

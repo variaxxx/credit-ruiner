@@ -13,11 +13,6 @@ import {UserService} from "../../services/user.service";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
-export interface MenuItem {
-    label: string;
-    icon: string;
-    url: string;
-}
 
 @Component({
     selector: 'app-sidebar',
@@ -39,26 +34,10 @@ export class SidebarComponent implements OnInit {
     private spinner = inject(NgxSpinnerService);
     private destroyRef = inject(DestroyRef);
 
-    public menuItems: MenuItem[] = [
-        {
-            label: 'Главная',
-            icon: 'home',
-            url: '/'
-        },
-        {
-            label: 'Анализ',
-            icon: 'bar-chart-3',
-            url: '/analysis'
-        },
-        {
-            label: 'История',
-            icon: 'history',
-            url: '/history'
-        }
-    ]
     public menuTranslate = this.navigationService.hideSidebar.value ? '-80px' : '0'
     protected username = signal<string | undefined>(undefined);
     protected email = signal<string | undefined>(undefined);
+    protected menuItems = this.navigationService.menuItems;
 
     @HostListener('window:resize', ['$event']) onResize() {
         this.navigationService.hideSidebar.next(window.innerWidth <= 540);

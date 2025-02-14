@@ -2,63 +2,56 @@
 @use '../../../ui-kit/styles/utility/breakpoints' as *;
 
 :host {
-  display: block;
+	display: block;
 
-  height: 100%;
-  @include up-breakpoint(sm) {
-    @include fixed-height(calc(100% - 96px))
-  }
+	height: 100%;
+	@include up-breakpoint(sm) {
+		@include fixed-height(calc(100% - 96px))
+	}
 
-  .analysis-wrapper {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+	.analysis-wrapper {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
 
-    padding: 16px;
-  }
+		padding: 16px;
+	}
 
-  .analysis-item {
-    display: flex;
-    flex-direction: column;
-    border-radius: 18px;
-    background-color: var(--background-accent-color);
-    border: 2px solid transparent;
-    cursor: pointer;
-    overflow: hidden;
-    box-shadow: var(--soft-shadow);
-    
-    &:hover {
-      border-color: var(--black-100);
-    }
-  }
+	.analysis-item {
+		display: flex;
+		flex-direction: column;
+		border-radius: 18px;
+		background-color: var(--background-accent-color);
+		cursor: pointer;
+		overflow: hidden;
+		box-shadow: var(--soft-shadow);
+		transition: var(--default-transition);
+		
+		&:hover {
+			background-color: var(--black-50);
+		}
+	}
 
-  .empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-  }
+	.secondary {
+		color: var(--secondary-text-color);
+	}
 
-  .secondary {
-    color: var(--secondary-text-color);
-  }
+	.nav-item {
+		@include fixed-size(32px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		cursor: pointer;
+		color: var(--secondary-text-color);
 
-  .nav-item {
-    @include fixed-size(32px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    cursor: pointer;
-    color: var(--secondary-text-color);
+		&.current {
+			background-color: var(--background-accent-color);
+			box-shadow: var(--soft-shadow);
+		}
 
-    &.current {
-      background-color: var(--background-accent-color);
-      box-shadow: var(--soft-shadow);
-    }
-
-    &.current, &:hover {
-      color: var(--primary-text-color);
-    }
-  }
+		&.current, &:hover {
+			color: var(--primary-text-color);
+		}
+	}
 }

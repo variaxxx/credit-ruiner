@@ -18,7 +18,6 @@ export class InputComponent {
   @Input({required: true}) control!: FormControl;
   @Input({required: true}) label!: string;
   @Input({required: true}) name!: string;
-  @Input({required: true}) required!: boolean;
   @Input({required: true}) placeholder!: string;
   @Input({required: true}) autocomplete!: string;
   @Input({transform: booleanAttribute}) light: boolean = false;

@@ -1,23 +1,18 @@
 <ngx-spinner
   bdColor="var(--sidebar-background-color)"
-  size = "large"
-  color = "var(--sidebar-primary-text-color)"
-  type = "fire"
+  size="large"
+  color="var(--sidebar-primary-text-color)"
+  type="fire"
   [disableAnimation]="true"
-  [fullScreen] = "true"
+  [fullScreen]="true"
 ></ngx-spinner>
 
-<div
-  class="shadow sm:block none"
-  [style.opacity]="getShadowOpacity()"
-></div>
+<div class="shadow sm:block none" [style.opacity]="getShadowOpacity()"></div>
 
-<nav
-  [style.translate]="menuTranslate"
->
+<nav [style.translate]="menuTranslate">
   <div class="flex flex-column">
     <div class="flex gap-12 align-items-center logo mt-16 mb-32">
-      <img src="assets/icons/logo.svg" alt="CR">
+      <img src="assets/icons/logo.svg" alt="CR" />
       <span class="span-big md:none">credit ruiner</span>
     </div>
 
@@ -28,56 +23,43 @@
         class="sm:flex align-items-center none menu-item"
         (click)="triggerSidebar()"
       >
-        <app-icon
-          icon="chevrons-left"
-          class="mx-12"
-        ></app-icon>
+        <app-icon icon="chevrons-left" class="mx-12"></app-icon>
       </li>
 
-      <hr class="sm:block none">
+      <hr class="sm:block none" />
 
       @for (menuItem of menuItems; track $index) {
-        <li
-          class="flex align-items-center mb-4 menu-item"
-          [class.active]="activeRoute() === menuItem.url"
-          [routerLink]="[menuItem.url]"
-          (click)="triggerSidebar()"
-        >
-          <app-icon
-            [icon]="menuItem.icon"
-            class="mx-12"
-          ></app-icon>
+      <li
+        class="flex align-items-center mb-4 menu-item"
+        [class.active]="activeRoute() === menuItem.url"
+        [routerLink]="[menuItem.url]"
+        (click)="triggerSidebar()"
+      >
+        <app-icon [icon]="menuItem.icon" class="mx-12"></app-icon>
 
-          <span
-            class="span-big md:none"
-          >{{ menuItem.label }}</span>
-        </li>
+        <span class="span-big md:none">{{ menuItem.label }}</span>
+      </li>
       }
     </ul>
   </div>
 
-  <div class="user mt-32">
-    <img
-      src="/assets/images/blank_user.jpg"
-      alt="Avatar"
-      class="user-avatar"
-      [routerLink]="['/profile']"
-      (click)="triggerSidebar()"
-    >
+  <div
+    class="user mt-32 cursor-pointer"
+    [routerLink]="['/profile']"
+    (click)="triggerSidebar()"
+  >
+    <img src="/assets/images/blank_user.jpg" alt="Avatar" class="user-avatar" />
 
     <div class="flex flex-column gap-4">
-      <span
-        class="span-big md:none text-overflow user-name"
-      >{{ username() }}</span>
+      <span class="span-big md:none text-overflow user-name">{{
+        username()
+      }}</span>
 
-      <span
-        class="span-normal md:none text-overflow user-email"
-      >{{ email() }}</span>
+      <span class="span-normal md:none text-overflow user-email">{{
+        email()
+      }}</span>
     </div>
 
-    <app-icon
-      icon="log-out"
-      (click)="logout()"
-    ></app-icon>
+    <app-icon icon="log-out" (click)="logout()"></app-icon>
   </div>
 </nav>

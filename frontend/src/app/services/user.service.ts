@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, Observable, switchMap, tap, throwError} from "rxjs";
+import {BehaviorSubject, catchError, first, Observable, switchMap, tap, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environments} from "../../environments/environments";
 import {CookieService} from "ngx-cookie-service";
@@ -46,7 +46,7 @@ export class UserService {
 
   public token: string | null = null;
   public refresh_token: string | null = null;
-  private user = new BehaviorSubject<UserData | null>(null);
+  public user = new BehaviorSubject<UserData | null>(null);
   public $user = this.user.asObservable();
 
   /**
@@ -149,6 +149,14 @@ export class UserService {
   get isUserLoggedIn(): boolean {
     if (!this.token) {
       this.getTokensFromCookies();
+
+      if (this.refresh_token && !this.token) {
+        this.refreshAuthToken()
+          .pipe(first())
+          .subscribe(() => {
+            this.router.navigateByUrl('/');
+          });
+      }
     }
 
     return !!this.token;
@@ -175,6 +183,9 @@ export class UserService {
           console.log('Successfully fetched user info.')
         }),
         catchError(err => {
+          if (err.status == 404) {
+            this.logout();
+          }
           throw new Error('Error fetching user info');
         })
       )

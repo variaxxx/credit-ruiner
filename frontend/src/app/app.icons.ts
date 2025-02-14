@@ -17,7 +17,8 @@ const icons: readonly string[] = [
 	'alert-triangle',
 	'check-check',
 	'info',
-	'x'
+	'x',
+	'user'
 ]
 
 export const iconsConfig: IconsConfig = {

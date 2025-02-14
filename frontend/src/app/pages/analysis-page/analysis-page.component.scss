@@ -1,3 +1,88 @@
+@use '../../../ui-kit/styles/utility/sizes/sizes' as *;
+@use '../../../ui-kit/styles/utility/typography/typography' as *;
+@use '../../../ui-kit/styles/utility/breakpoints' as *;
+
 :host {
   display: block;
+
+  height: 100%;
+  @include up-breakpoint(sm) {
+    @include fixed-height(calc(100% - 96px))
+  }
+
+  .text-align-center {
+    text-align: center;
+  }
+
+  .container-fluid {
+    min-height: 100%;
+  }
+
+  .stepper {
+    &-wrapper {
+      align-items: center;
+      justify-content: center;
+      overflow-x: scroll;
+      scrollbar-width: none;
+      gap: 8px;
+    }
+
+    &-marker {
+      @include fixed-size(24px);
+
+      border-radius: 50%;
+      border: 4px solid var(--sidebar-background-color);
+      padding: 2px;
+
+      app-icon {
+        --icon-color: var(--sidebar-primary-text-color);
+        --icon-size: 20px;
+      }
+
+      &.done {
+        background-color: var(--sidebar-background-color);
+      }
+
+      &:not(.done):not(.active) {
+        opacity: .4;
+      }
+    }
+
+    &-line {
+      min-width: 32px;
+      max-width: 196px;
+      margin: auto 0;
+      width: 100%;
+
+      border-radius: 2px;
+      border: 2px solid var(--sidebar-background-color);
+
+      &.active {
+        border-style: dashed;
+      }
+
+      &:not(.done):not(.active) {
+        border-width: 1px;
+        opacity: .4;
+      }
+    }
+  }
+
+  .poll {
+    &-container {
+      background-color: var(--background-accent-color);
+      border-radius: 18px;
+      padding: 0 16px 0 16px;
+
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      grid-gap: 16px;
+      justify-content: center;
+      box-shadow: var(--soft-shadow);
+
+      form {
+        width: fit-content;
+      }
+    }
+  }
 }

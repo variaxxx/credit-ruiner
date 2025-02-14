@@ -17,7 +17,6 @@
           placeholder="Введите адрес почты"
           autocomplete="email"
           [control]="getControl('email')"
-          [required]="loginForm.controls['email'].invalid && !loginForm.controls['email'].untouched"
         ></app-input>
 
         <app-input
@@ -28,16 +27,18 @@
           placeholder="Введите пароль"
           autocomplete="current-password"
           [control]="getControl('password')"
-          [required]="loginForm.controls['password'].invalid && !loginForm.controls['password'].untouched"
         ></app-input>
 
         @if (clientError || serverError) {
-          <p
-            class="text-tiny mx-16 st-2xs text-red-300 inline-flex align-items-center gap-6"
-          >
-            <app-icon icon="alert-circle" class="registration-alert icon-red-300"></app-icon>
-            {{ serverError ? serverError : clientError }}
-          </p>
+        <p
+          class="text-tiny mx-16 st-2xs text-red-300 inline-flex align-items-center gap-6"
+        >
+          <app-icon
+            icon="alert-circle"
+            class="registration-alert icon-red-300"
+          ></app-icon>
+          {{ serverError ? serverError : clientError }}
+        </p>
         }
 
         <app-button
@@ -49,13 +50,6 @@
         >
           Подтвердить
         </app-button>
-
-<!--        TODO: link component-->
-        <span
-          class="st-s text-black-300 span-small align-self-center"
-        >
-          Забыли пароль?
-        </span>
       </form>
     </div>
   </div>

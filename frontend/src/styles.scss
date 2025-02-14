@@ -3,8 +3,6 @@ html, body {
   background-color: var(--sidebar-background-color);
 }
 
-// TODO: edit selection
-
 *::selection {
   background-color: var(--green-200);
   color: var(--black-750);

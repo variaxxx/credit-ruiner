@@ -17,7 +17,6 @@
           placeholder="Введите имя"
           autocomplete="name"
           [control]="getControl('name')"
-          [required]="registerForm.controls['name'].invalid && !registerForm.controls['name'].untouched"
         ></app-input>
 
         <app-input
@@ -28,7 +27,6 @@
           placeholder="Введите адрес почты"
           autocomplete="email"
           [control]="getControl('email')"
-          [required]="registerForm.controls['email'].invalid && !registerForm.controls['email'].untouched"
         ></app-input>
 
         <app-input
@@ -39,7 +37,6 @@
           placeholder="Введите пароль"
           autocomplete="new-password"
           [control]="getControl('password')"
-          [required]="registerForm.controls['password'].invalid && !registerForm.controls['password'].untouched"
           (eyeClicked)="hidePassword = $event"
         ></app-input>
 
@@ -51,16 +48,18 @@
           placeholder="Повторите пароль"
           autocomplete="new-password"
           [control]="getControl('password_confirmation')"
-          [required]="registerForm.controls['password_confirmation'].invalid && !registerForm.controls['password_confirmation'].untouched"
         ></app-input>
 
         @if (clientError || serverError) {
-          <p
-            class="text-tiny mx-16 st-2xs text-red-300 inline-flex align-items-center gap-6"
-          >
-            <app-icon icon="alert-circle" class="registration-alert icon-red-300"></app-icon>
-            {{ serverError ? serverError : clientError }}
-          </p>
+        <p
+          class="text-tiny mx-16 st-2xs text-red-300 inline-flex align-items-center gap-6"
+        >
+          <app-icon
+            icon="alert-circle"
+            class="registration-alert icon-red-300"
+          ></app-icon>
+          {{ serverError ? serverError : clientError }}
+        </p>
         }
 
         <app-button

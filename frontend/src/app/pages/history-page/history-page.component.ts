@@ -34,6 +34,7 @@ export class HistoryPageComponent implements OnInit {
     this.currentPage
       .pipe(
         throttleTime(500),
+        delay(1000), // TODO remove delay
         takeUntilDestroyed(this.destroy),
         switchMap(value => this.getHistory())
       )

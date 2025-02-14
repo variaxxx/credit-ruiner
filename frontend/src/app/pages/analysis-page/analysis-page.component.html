@@ -1,1 +1,166 @@
-<p class="text-white-1000">analysis-page works!</p>
+<div class="container-fluid flex flex-column justify-content-center">
+  @if (!inProgress()) {
+
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-lg-6 сol-md-8 col-sm-12 flex flex-column px-32">
+      <h3 class="text-align-center">
+        Проверь свою<br />кредитоспособность<br />с CreditRuiner
+      </h3>
+      <span class="span-big st-s text-align-center"
+        >Заполните несколько простых шагов, и мы проведем анализ ваших
+        финансовых данных. Это поможет вам понять свои риски и повысить шансы на
+        одобрение кредита.</span
+      >
+      <app-button
+        size="lg"
+        color="black"
+        (click)="inProgress.set(true)"
+        class="st-s"
+        >Начать</app-button
+      >
+    </div>
+  </div>
+
+  } @else {
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12 flex flex-column">
+      <div class="stepper-wrapper px-32 w-100 flex st-s sm:none">
+        @for (i of [1, 2, 3, 4, 5]; track $index) {
+        <div
+          class="stepper-marker"
+          [class.done]="currentSlide() > i"
+          [class.active]="currentSlide() == i"
+        >
+          @if (currentSlide() > i) {
+          <app-icon icon="check-check"></app-icon>
+          }
+        </div>
+
+        @if (i != 5) {
+        <div
+          class="stepper-line"
+          [class.active]="currentSlide() == i + 1"
+          [class.done]="currentSlide() > i + 1"
+        ></div>
+        } }
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12 flex flex-column h-100">
+      @if (currentSlide() == 1) {
+
+      <h1 class="px-32 md:px-12 st-s" style="text-align: center">
+        Основная информация
+      </h1>
+
+      <form class="flex flex-column st-s" [formGroup]="form">
+        <app-input
+          class="w-100"
+          label="Как вас зовут?"
+          autocomplete="off"
+          name="name"
+          placeholder="Введите имя"
+          light
+          [control]="getControl('name')"
+        ></app-input>
+
+        <app-input
+          class="st-s w-100"
+          label="Какова сумма кредита?"
+          autocomplete="off"
+          name="current_loan_amount"
+          placeholder="Введите сумму кредита"
+          type="number"
+          light
+          [control]="getControl('current_loan_amount')"
+        ></app-input>
+
+        <span class="span-normal st-s w-auto px-16"
+          >На какой срок планируется брать кредит?</span
+        >
+        <div class="st-2xs flex w-100 gap-8 sm:flex-column">
+          <app-select-item
+            header="Краткосрочный"
+            description="До 1 года"
+            class="flex-grow-1"
+            [class.selected]="isSelectedTerm('SHORT')"
+            (click)="selectTerm('SHORT')"
+          ></app-select-item>
+
+          <app-select-item
+            header="Долгосрочный"
+            description="Более 1 года"
+            class="flex-grow-1"
+            [class.selected]="isSelectedTerm('LONG')"
+            (click)="selectTerm('LONG')"
+          ></app-select-item>
+        </div>
+      </form>
+
+      <div class="flex justify-content-between gap-12 st-s sb-s">
+        <app-button color="white" (click)="inProgress.set(false)"
+          >Назад</app-button
+        >
+        <app-button color="black" (click)="currentSlide.set(2)"
+          >Далее</app-button
+        >
+      </div>
+
+      } @else if (currentSlide() == 2) {
+
+      <h1>Sosi 2</h1>
+      <div class="h-100 bg-red-100"></div>
+      <div class="flex justify-content-between px-32">
+        <app-button color="white" (click)="currentSlide.set(1)"
+          >Назад</app-button
+        >
+        <app-button color="black" (click)="currentSlide.set(3)"
+          >Далее</app-button
+        >
+      </div>
+
+      } @else if (currentSlide() == 3) {
+
+      <h1>Sosi 3</h1>
+      <div class="h-100 bg-red-100"></div>
+      <div class="flex justify-content-between px-32">
+        <app-button color="white" (click)="currentSlide.set(2)"
+          >Назад</app-button
+        >
+        <app-button color="black" (click)="currentSlide.set(4)"
+          >Далее</app-button
+        >
+      </div>
+
+      } @else if (currentSlide() == 4) {
+
+      <h1>Sosi 4</h1>
+      <div class="h-100 bg-red-100"></div>
+      <div class="flex justify-content-between px-32">
+        <app-button color="white" (click)="currentSlide.set(3)"
+          >Назад</app-button
+        >
+        <app-button color="black" (click)="currentSlide.set(5)"
+          >Далее</app-button
+        >
+      </div>
+
+      } @else if (currentSlide() == 5) {
+
+      <h1>Sosi 5</h1>
+      <div class="h-100 bg-red-100"></div>
+      <div class="flex justify-content-between px-32">
+        <app-button color="white" (click)="currentSlide.set(4)"
+          >Назад</app-button
+        >
+        <app-button color="black">Завершить</app-button>
+      </div>
+
+      }
+    </div>
+  </div>
+  }
+</div>

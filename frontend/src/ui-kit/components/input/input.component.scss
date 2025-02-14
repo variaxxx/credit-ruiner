@@ -51,7 +51,7 @@
       background-color: var(--input-bg-accent-color);
       border: 2px solid var(--input-border-color);
 
-      &:has(input:invalid) {
+      &:has(input:required) {
         border-color: var(--red-400);
       }
 

@@ -129,7 +129,6 @@
       &-avatar {
         @include fixed-size(44px);
 
-        cursor: pointer;
         border-radius: 22px;
         object-fit: cover;
       }

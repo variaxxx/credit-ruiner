@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+
+  padding: 0 16px 0 16px;
+  cursor: pointer;
+  background-color: var(--background-accent-color);
+  transition: background-color var(--default-transition), border-color var(--default-transition);
+  border: 2px solid var(--black-100);
+
+  &.selected {
+    border-color: var(--primary-text-color);
+  }
+
+  &:hover {
+    background-color: var(--black-100);
+  }
+
+  .description {
+    color: var(--secondary-text-color);
+  }
+}

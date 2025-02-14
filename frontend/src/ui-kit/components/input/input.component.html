@@ -12,16 +12,16 @@
       [name]="name"
       [placeholder]="placeholder"
       [autocomplete]="autocomplete"
-      [required]="required"
       [formControl]="control"
-    >
+      [required]="!!control.errors && !control.untouched"
+    />
 
     @if (showEye) {
-      <app-icon
-        [icon]="hideInput ? 'eye-off' : 'eye'"
-        (click)="eyeTriggered()"
-        class="eye-btn"
-      ></app-icon>
+    <app-icon
+      [icon]="hideInput ? 'eye-off' : 'eye'"
+      (click)="eyeTriggered()"
+      class="eye-btn"
+    ></app-icon>
     }
   </div>
 </label>

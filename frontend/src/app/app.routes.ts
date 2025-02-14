@@ -48,12 +48,13 @@ export const routes: Routes = [
 			{
 				path: 'history',
 				component: HistoryPageComponent,
-				title: 'smth'
+				title: 'История проведенных анализов | CreditRuiner',
+				pathMatch: 'full'
 			},
 			{
 				path: 'history/:id',
 				component: AnalysisInfoPageComponent,
-				title: 'smth'
+				title: 'Подробности анализа | CreditRuiner'
 			}
 		]
 	},

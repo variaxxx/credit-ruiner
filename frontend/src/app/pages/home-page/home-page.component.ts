@@ -1,26 +1,20 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component} from '@angular/core';
-import {AsyncPipe} from "@angular/common";
-import {ButtonComponent} from "../../../ui-kit/components/button/button.component";
-import {BehaviorSubject} from "rxjs";
-import {LinkComponent} from "../../../ui-kit/components/link/link.component";
+import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
+import { UserService } from '../../services/user.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home-page',
   imports: [
-    ButtonComponent,
-    AsyncPipe,
-    LinkComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomePageComponent implements AfterViewInit {
+export class HomePageComponent {
+  private userService = inject(UserService);
+  private destroyRef = inject(DestroyRef);
+  private spinnerService = inject(NgxSpinnerService);
 
-  public isLoading = new BehaviorSubject(true);
-  public isLoading$ = this.isLoading.asObservable();
-
-  ngAfterViewInit() {
-    this.isLoading.next(false);
-  }
+  protected readonly user$ = toSignal(this.userService.$user); 
 }

@@ -13,6 +13,10 @@ def me():
   email = get_jwt_identity()
 
   user = User.query.filter_by(email=email).first()
+
+  if not user:
+    return jsonify(msg="No user found"), 404
+
   user_info = user_schema.dump(user)
   del user_info['password_hash']
 

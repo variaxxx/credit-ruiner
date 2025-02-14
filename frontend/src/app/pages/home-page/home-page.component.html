@@ -1,21 +1,5 @@
-<div class="p-8 bg-black-900 flex gap-8">
-  <app-button color="green" size="sm">Test button</app-button>
-  <app-button color="white" size="sm">Test button</app-button>
-  <app-button color="black" size="sm">Test button</app-button>
-  <app-button color="green" size="sm" type="primary">Test button</app-button>
-  <app-button color="white" size="sm" type="primary">Test button</app-button>
-  <app-button color="black" size="sm" type="primary">Test button</app-button>
-</div>
-
-<div class="p-8 flex gap-8">
-  <app-button color="green" size="sm">Test button</app-button>
-  <app-button color="white" size="sm">Test button</app-button>
-  <app-button color="black" size="sm">Test button</app-button>
-  <app-button color="green" size="sm" type="primary">Test button</app-button>
-  <app-button color="white" size="sm" type="primary">Test button</app-button>
-  <app-button color="black" size="sm" type="primary">Test button</app-button>
-</div>
-
-<div class="p-8 flex gap-8">
-  <app-link href="/welcome">Test link</app-link>
+<div class="container-fluid">
+    <div class="row st-s">
+        <h1>Привет, {{ user$()?.name }}</h1>
+    </div>
 </div>
