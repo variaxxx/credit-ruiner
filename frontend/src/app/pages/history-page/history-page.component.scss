@@ -14,7 +14,7 @@
 		flex-direction: column;
 		flex-grow: 1;
 
-		padding: 16px;
+		padding: 0 16px 16px 16px;
 	}
 
 	.analysis-item {
@@ -24,11 +24,10 @@
 		background-color: var(--background-accent-color);
 		cursor: pointer;
 		overflow: hidden;
-		box-shadow: var(--soft-shadow);
 		transition: var(--default-transition);
 		
 		&:hover {
-			background-color: var(--black-50);
+			transform: scale(1.05);
 		}
 	}
 
@@ -44,13 +43,14 @@
 		border-radius: 50%;
 		cursor: pointer;
 		color: var(--secondary-text-color);
+		transition: color var(--default-transition);
 
 		&.current {
-			background-color: var(--background-accent-color);
-			box-shadow: var(--soft-shadow);
+			background-color: var(--sidebar-background-accent-color);
+			color: var(--sidebar-primary-text-color);
 		}
 
-		&.current, &:hover {
+		&:hover:not(.current) {
 			color: var(--primary-text-color);
 		}
 	}

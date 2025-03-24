@@ -6,13 +6,15 @@ import {ButtonComponent} from "../../../../ui-kit/components/button/button.compo
 import {catchError, EMPTY} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {NotificationService} from "../../../services/notification.service";
+import {JsonPipe} from "@angular/common";
 
 @Component({
   selector: 'app-analysis-info-page',
-  imports: [
-    ButtonComponent,
-    RouterLink
-  ],
+	imports: [
+		ButtonComponent,
+		RouterLink,
+		JsonPipe
+	],
   templateUrl: './analysis-info-page.component.html',
   styleUrl: './analysis-info-page.component.scss'
 })

@@ -75,7 +75,7 @@ class AnalysisSchema(ma.Schema):
     include_fk = True
 
   id = fields.Int(dump_only=True)
-  user_id = fields.Int(dump_only=True)
+  user_id = fields.Int(required=True)
   name = fields.Str(required=True, validate=Length(min=1, max=80))
   date = fields.DateTime(required=True)
   current_loan_amount = fields.Integer(required=True, validate=Range(min=0))
@@ -96,6 +96,28 @@ class AnalysisSchema(ma.Schema):
   success_percentage = fields.Float(required=True, validate=Range(min=0.0, max=100.0))
 
 
+class AnalysisRequestSchema(ma.Schema):
+  class Meta:
+    model = Analysis
+    load_instance = True
+
+  name = fields.Str(required=True, validate=Length(min=1, max=80))
+  current_loan_amount = fields.Integer(required=True, validate=Range(min=0))
+  term = fields.Str(required=True, validate=OneOf(term_values))
+  years_in_job = fields.Str(required=True, validate=OneOf(years_in_job_values))
+  home_ownership = fields.Str(required=True, validate=OneOf(home_ownership_values))
+  annual_income = fields.Integer(required=True, validate=Range(min=0))
+  purpose = fields.Str(required=True, validate=OneOf(purpose_values))
+  monthly_debt = fields.Float(required=True, validate=Range(min=0))
+  years_of_credit_history = fields.Float(required=True, validate=Range(min=0))
+  months_since_delinquent = fields.Integer(required=True, validate=Range(min=-1))
+  number_of_accounts = fields.Integer(required=True, validate=Range(min=0))
+  number_of_problems = fields.Integer(required=True, validate=Range(min=0))
+  current_credit_balance = fields.Float(required=True, validate=Range(min=0))
+  bankruptcies = fields.Integer(required=True, validate=Range(min=0))
+  tax_liens = fields.Integer(required=True, validate=Range(min=0))
+
+
 class AnalysisShortSchema(ma.Schema):
   class Meta:
     model = Analysis
@@ -113,3 +135,5 @@ analyses_schema = AnalysisSchema(many=True)
 
 analysis_short_schema = AnalysisShortSchema()
 analyses_short_schema = AnalysisShortSchema(many=True)
+
+analysis_request_schema = AnalysisRequestSchema()

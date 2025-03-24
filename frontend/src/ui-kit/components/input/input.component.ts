@@ -1,4 +1,12 @@
-import {booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import {IconComponent} from "../icon/icon.component";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 
@@ -10,7 +18,8 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
   ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class InputComponent {
   @Input({transform: booleanAttribute}) showEye?: boolean;

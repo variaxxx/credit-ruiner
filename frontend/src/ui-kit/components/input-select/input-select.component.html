@@ -1,0 +1,38 @@
+<label
+  class="w-100"
+>
+  <span
+    class="label"
+    (click)="triggerList($event)"
+  >{{ label }}</span>
+
+  <div
+    class="select st-2xs"
+    [class.active]="isOpened()"
+    (click)="triggerList($event)"
+  >
+    <span
+      class="span-normal select-current w-100"
+      [class.empty]="selectedItem() === null"
+    >
+      {{ getSelectedItem() }}
+    </span>
+
+    <app-icon
+      class="select-icon"
+      icon="chevron-down"
+      [style.transform]="isOpened() ? 'rotate(0)' : 'rotate(90deg)'"
+    ></app-icon>
+  </div>
+
+  @if (isOpened()) {
+    <div @fadeInOut class="select-list st-2xs">
+      @for (option of options; track $index) {
+        <span
+          class="span-normal select-item"
+          (click)="selectItem($index)"
+        >{{ option.label }}</span>
+      }
+    </div>
+  }
+</label>

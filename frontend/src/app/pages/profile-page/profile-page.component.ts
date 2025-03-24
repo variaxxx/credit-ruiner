@@ -19,6 +19,7 @@ import {InputComponent} from "../../../ui-kit/components/input/input.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NotificationService} from "../../services/notification.service";
 import {IconButtonComponent} from "../../../ui-kit/components/icon-button/icon-button.component";
+import {onOpenAnimation} from "../../app.animations";
 
 @Component({
 	selector: 'app-profile-page',
@@ -32,7 +33,8 @@ import {IconButtonComponent} from "../../../ui-kit/components/icon-button/icon-b
 	],
 	templateUrl: './profile-page.component.html',
 	styleUrl: './profile-page.component.scss',
-	changeDetection: ChangeDetectionStrategy.OnPush
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	animations: [onOpenAnimation]
 })
 export class ProfilePageComponent implements OnInit {
 	private userService = inject(UserService);

@@ -1,0 +1,88 @@
+@use '../../styles/utility/sizes/sizes' as *;
+@use '../../styles/utility/typography/typography' as *;
+
+app-input-select {
+  label {
+    position: relative;
+
+    .label {
+      @include span-styles;
+      @include span-normal;
+
+      padding: 0 16px;
+    }
+
+    .select {
+      @include fixed-height(60px);
+      @include fixed-width(100%);
+      @include span-styles;
+      @include span-normal;
+
+      transition: border-color var(--default-transition), color var(--default-transition);
+
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 0 20px 0 20px;
+      border-radius: 12px;
+      border: 2px solid var(--black-100);
+
+      background-color: var(--background-accent-color);
+
+      &.active {
+        border-color: var(--primary-text-color);
+      }
+
+      &-current {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &.empty {
+          color: var(--secondary-text-color);
+        }
+      }
+
+      &-icon {
+        transition: transform var(--default-transition);
+
+        --icon-color: var(--primary-text-color);
+      }
+
+      &-list {
+        border: 2px solid var(--black-100);
+        border-radius: 12px;
+        background-color: var(--background-accent-color);
+
+        width: 100%;
+        max-height: 148px;
+        overflow-y: scroll;
+
+        position: absolute;
+        z-index: 200;
+        display: flex;
+        flex-direction: column;
+        padding: 4px;
+      }
+
+      &-item {
+        transition: background-color var(--default-transition);
+        padding: 12px;
+        border-radius: 8px;
+
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        &:hover {
+          background-color: var(--black-100);
+        }
+      }
+    }
+  }
+}

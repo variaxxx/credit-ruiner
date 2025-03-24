@@ -1,7 +1,7 @@
 @use '../../styles/utility/typography/typography' as *;
 @use '../../styles/utility/sizes/sizes' as *;
 
-:host {
+app-input {
   display: block;
 
   label {
@@ -38,7 +38,7 @@
       @include span-styles;
       @include span-normal;
 
-      transition: border-color var(--default-transition), color var(--default-transition), ;
+      transition: border-color var(--default-transition), color var(--default-transition),;
 
       display: flex;
       gap: 10px;
@@ -57,6 +57,7 @@
 
       &:has(input:active), &:has(input:focus) {
         border-color: var(--input-primary-text-color);
+
         input {
           color: var(--input-primary-text-color);
         }

@@ -18,7 +18,9 @@ const icons: readonly string[] = [
 	'check-check',
 	'info',
 	'x',
-	'user'
+	'user',
+	'chevron-down',
+	'check'
 ]
 
 export const iconsConfig: IconsConfig = {
