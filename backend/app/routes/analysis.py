@@ -66,7 +66,7 @@ def do_analysis():
     try:
         df = create_data_frame(data)
 
-        model = joblib.load('backend/instance/model.pkl')
+        model = joblib.load('instance/model.pkl')
         loan_status = model.predict(df).tolist()[0]
         success_percentage = round(model.predict_proba(df).tolist()[0][1] * 100)
 

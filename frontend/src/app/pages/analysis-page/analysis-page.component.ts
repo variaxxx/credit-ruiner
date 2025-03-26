@@ -264,6 +264,7 @@ export class AnalysisPageComponent {
 		if (this.form.invalid) {
 			this.notificationService.throwWarning('Вернитесь и заполните все поля корректно!');
 		} else {
+      this.notificationService.showInfo('Ваш запрос был отправлен. Ожидайте ответа.');
 			this.analysisService.doAnalysis(
 				{
 					...this.form.controls.slide1.value,
