@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+# TODO: dotenv
 
 class Config:
   JWT_SECRET_KEY = 'b86d77ef970b4468a75e093099f681f7'

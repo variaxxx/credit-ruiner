@@ -16,11 +16,6 @@ export class NavigationService {
 
   public menuItems: MenuItem[] = [
     {
-      label: 'Главная',
-      icon: 'home',
-      url: '/'
-    },
-    {
       label: 'Анализ',
       icon: 'bar-chart-3',
       url: '/analysis'
@@ -36,7 +31,7 @@ export class NavigationService {
       url: '/profile'
     }
   ]
-  
+
   /**
    * Показывает/скрывает сайдбар если ширина экрана менее 540 пикселей.
    */
