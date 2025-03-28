@@ -7,7 +7,7 @@ import {
 } from "../../services/analysis.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {DatePipe} from "@angular/common";
-import {BehaviorSubject, delay, switchMap, tap, throttleTime} from "rxjs";
+import {BehaviorSubject, switchMap, tap, throttleTime} from "rxjs";
 import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 import {onOpenAnimation} from "../../app.animations";
 
@@ -39,7 +39,6 @@ export class HistoryPageComponent implements OnInit {
 					this.isFetching.set(true);
 				}),
 				throttleTime(500),
-				delay(1000), // TODO remove delay
 				takeUntilDestroyed(this.destroy),
 				switchMap(value => this.getHistory())
 			)

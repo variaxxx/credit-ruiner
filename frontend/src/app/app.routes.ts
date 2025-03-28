@@ -4,7 +4,6 @@ import {isLoggedGuard} from "./guards/is-logged.guard";
 import {LoginPageComponent} from "./pages/auth/login-page/login-page.component";
 import {RegistrationPageComponent} from "./pages/auth/registration-page/registration-page.component";
 import {SidebarComponent} from "./partials/sidebar/sidebar.component";
-import {FooterComponent} from "./partials/footer/footer.component";
 import {AuthLayoutComponent} from "./layouts/auth-layout/auth-layout.component";
 import {AnalysisPageComponent} from "./pages/analysis-page/analysis-page.component";
 import {ProfilePageComponent} from "./pages/profile-page/profile-page.component";
@@ -24,11 +23,11 @@ export const routes: Routes = [
 				outlet: 'sidebar',
 				component: SidebarComponent
 			},
-			{
-				path: '',
-				outlet: 'footer',
-				component: FooterComponent
-			},
+      {
+        path: '',
+        pathMatch: "full",
+        redirectTo: 'analysis'
+      },
 			{
 				path: 'analysis',
 				component: AnalysisPageComponent,

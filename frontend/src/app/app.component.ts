@@ -1,19 +1,18 @@
 import {Component, ComponentRef, inject, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {RouterOutlet} from '@angular/router';
 import {NotificationComponent} from "./partials/notification/notification.component";
 import {NotificationService, NotificationType} from "./services/notification.service";
 
 @Component({
-    selector: 'app-root',
-    imports: [
-      RouterOutlet,
-      NotificationComponent
-    ],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+  selector: 'app-root',
+  imports: [
+    RouterOutlet
+  ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  @ViewChild('notification', { read: ViewContainerRef })
+  @ViewChild('notification', {read: ViewContainerRef})
   private viewContainerRef!: ViewContainerRef;
   private componentRef!: ComponentRef<NotificationComponent>;
 

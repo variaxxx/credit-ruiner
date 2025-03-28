@@ -15,7 +15,7 @@ analysis_bp = Blueprint('analysis', __name__)
 @jwt_required()
 def analysis_history():
     user_id = User.query.filter_by(email=get_jwt_identity()).first().id
-    history = Analysis.query.filter_by(user_id=user_id).order_by(Analysis.date).all()
+    history = Analysis.query.filter_by(user_id=user_id).order_by(Analysis.date).all()[::-1]
 
     if len(history) == 0:
         return jsonify(

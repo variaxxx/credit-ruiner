@@ -4,8 +4,6 @@ import {catchError, Observable, tap} from "rxjs";
 import {environments} from "../../environments/environments";
 import {FormGroup} from "@angular/forms";
 
-// TODO: refactor
-
 export type YearsInJobT = '<1' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '>10'
 export type HomeOwnershipT = 'MORTGAGE' | 'OWN' | 'RENT';
 export type TermT = 'SHORT' | 'LONG';

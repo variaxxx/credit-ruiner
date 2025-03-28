@@ -5,7 +5,6 @@ import {InputComponent} from "../../../ui-kit/components/input/input.component";
 import {
 	AbstractControl, FormBuilder,
 	FormControl,
-	FormGroup,
 	ReactiveFormsModule,
 	ValidationErrors,
 	ValidatorFn,
