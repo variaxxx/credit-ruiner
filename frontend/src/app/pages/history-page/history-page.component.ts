@@ -35,19 +35,19 @@ export class HistoryPageComponent implements OnInit {
 	ngOnInit() {
 		this.currentPage
 			.pipe(
-				tap(page => {
+				tap(() => {
 					this.isFetching.set(true);
 				}),
 				throttleTime(500),
 				takeUntilDestroyed(this.destroy),
-				switchMap(value => this.getHistory())
+				switchMap(() => this.getHistory())
 			)
 			.subscribe({
 				next: value => {
 					this.history.set(value);
 					this.isFetching.set(false);
 				},
-				error: err => {
+				error: () => {
 					this.prevPage();
 					this.isFetching.set(false);
 				}

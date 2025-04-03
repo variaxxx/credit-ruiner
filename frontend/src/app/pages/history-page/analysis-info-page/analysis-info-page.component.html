@@ -29,7 +29,7 @@
         <span class="span-big st-2xs">Цель кредита: {{ getPurpose() }}</span>
         <span class="span-big st-2xs">Платеж по долгам в месяц: {{ analysisInfo()?.monthly_debt }} руб</span>
         <span class="span-big st-2xs">Продолжительность кредитной истории в годах: {{ analysisInfo()?.years_of_credit_history }}</span>
-        <span class="span-big st-2xs">Количество месяцев с последнего просроченного платежа: {{ analysisInfo()?.months_since_delinquent }}</span>
+        <span class="span-big st-2xs">Количество месяцев с последнего просроченного платежа: {{ analysisInfo()?.months_since_delinquent != -1 ? analysisInfo()?.months_since_delinquent : 'Не было таковых' }}</span>
         <span class="span-big st-2xs">Количество кредитных счетов: {{ analysisInfo()?.number_of_accounts }}</span>
         <span class="span-big st-2xs">Количество проблем с кредитами: {{ analysisInfo()?.number_of_problems }}</span>
         <span class="span-big st-2xs">Текущий кредитный баланс: {{ analysisInfo()?.current_credit_balance }}</span>

@@ -1,8 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {catchError, Observable, tap} from "rxjs";
-import {environments} from "../../environments/environments";
-import {FormGroup} from "@angular/forms";
+import {environment} from "../../environments/environment";
 
 export type YearsInJobT = '<1' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '>10'
 export type HomeOwnershipT = 'MORTGAGE' | 'OWN' | 'RENT';
@@ -85,17 +84,17 @@ export class AnalysisService {
 	private http = inject(HttpClient);
 
 	public getHistory(currentPage: number, pageSize: number): Observable<AnalysisHistoryResponse> {
-		return this.http.get<AnalysisHistoryResponse>(`${environments.apiBaseUrl}/analysis/history?count=${pageSize}&page=${currentPage}`)
+		return this.http.get<AnalysisHistoryResponse>(`${environment.apiBaseUrl}/analysis/history?count=${pageSize}&page=${currentPage}`)
 			.pipe(
 				catchError((err) => {
 					throw err;
 				}),
-				tap(value => console.log('Successfully fetched analysis history.'))
+				tap(() => console.log('Successfully fetched analysis history.'))
 			)
 	}
 
 	public getAnalysisInfo(id: string) {
-		return this.http.get<AnalysisInfo>(`${environments.apiBaseUrl}/analysis/history/${id}`)
+		return this.http.get<AnalysisInfo>(`${environment.apiBaseUrl}/analysis/history/${id}`)
 			.pipe(
 				catchError(err => {
 					throw err;
@@ -104,7 +103,7 @@ export class AnalysisService {
 	}
 
 	public deleteAnalysisFromHistory(id: number) {
-		return this.http.delete(`${environments.apiBaseUrl}/analysis/history/${id}`)
+		return this.http.delete(`${environment.apiBaseUrl}/analysis/history/${id}`)
 			.pipe(
 				catchError(err => {
 					throw err;
@@ -117,7 +116,7 @@ export class AnalysisService {
 		for (const key in payload) {
 			fd.append(key, payload[key as keyof AnalysisRequest].toString());
 		}
-		return this.http.post<AnalysisShortInfo>(`${environments.apiBaseUrl}/analysis/`, fd)
+		return this.http.post<AnalysisShortInfo>(`${environment.apiBaseUrl}/analysis/`, fd)
 			.pipe(
 				catchError(err => {
 					throw err;

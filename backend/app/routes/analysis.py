@@ -5,8 +5,8 @@ from marshmallow import ValidationError
 from app.models.user import User
 from app.extensions import db
 from datetime import datetime
-import joblib
 import pandas as pd
+import joblib
 
 analysis_bp = Blueprint('analysis', __name__)
 
@@ -49,43 +49,43 @@ def analysis_history():
     ), 200
 
 
-@analysis_bp.route('/', methods=['POST'])
-@jwt_required()
+@analysis_bp.route('/', methods=['POST']) # Регистрируем роут
+@jwt_required() # Требуем JWT токен
 def do_analysis():
-    user_email = get_jwt_identity()
-    user_id = User.query.filter_by(email=user_email).first().id
+    user_email = get_jwt_identity() # Достаем из токена почту
+    user_id = User.query.filter_by(email=user_email).first().id # С помощью почты находим айди пользователя
 
-    data = request.form.to_dict()
-    date = datetime.now()
+    data = request.form.to_dict() # Формируем словарь из тела запроса
+    date = datetime.now() # Формируем текущую дату
 
-    errors = analysis_request_schema.validate(data)
+    errors = analysis_request_schema.validate(data) # Валидируем введенные данные
 
-    if errors:
+    if errors: # Если найдены ошибки при валидации возвращаем ошибку
         return jsonify(msg=errors), 422
 
     try:
-        df = create_data_frame(data)
+        df = create_data_frame(data) # Создаем дата-фрейм из введенных данных
 
-        model = joblib.load('instance/model.pkl')
-        loan_status = model.predict(df).tolist()[0]
-        success_percentage = round(model.predict_proba(df).tolist()[0][1] * 100)
+        model = joblib.load('instance/model.pkl') # Загружаем модель
+        loan_status = model.predict(df).tolist()[0] # Предсказываем результат
+        success_percentage = round(model.predict_proba(df).tolist()[0][1] * 100) # Предсказываем шанс выдачи
 
-        data['user_id'] = user_id
+        data['user_id'] = user_id # Добавляем недостающие данные к словарю
         data['date'] = str(date)
         data['success_percentage'] = str(success_percentage)
         data['loan_status'] = str(loan_status)
 
 
-        analysis_data = analysis_schema.load(data)
+        analysis_data = analysis_schema.load(data) # Валидируем данные
 
-        analysis = Analysis(**analysis_data)
+        analysis = Analysis(**analysis_data) # Создаем новый анализ по модели
 
-        db.session.add(analysis)
-        db.session.commit()
+        db.session.add(analysis) # Загружаем анализ в БД
+        db.session.commit() # Сохраняем изменения в БД
 
-        return jsonify(id=analysis.id, name=analysis.name, date=analysis.date, loan_status=loan_status, success_percentage=success_percentage), 200
+        return jsonify(id=analysis.id, name=analysis.name, date=analysis.date, loan_status=loan_status, success_percentage=success_percentage), 200 # Возвращаем краткую информацию об анализе
     except ValidationError as err:
-        return jsonify(msg=err.messages), 400
+        return jsonify(msg=err.messages), 400 # При ошибках при валидации возвращаем ошибку
 
 
 @analysis_bp.route('/history/<id>', methods=['DELETE'])

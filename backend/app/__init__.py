@@ -13,6 +13,9 @@ def create_app():
 
   CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
 
+  # Model loading
+  # model = joblib.load('instance/model.pkl')
+
   # Extensions initialization
   db.init_app(app)
   jwt.init_app(app)

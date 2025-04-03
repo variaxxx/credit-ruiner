@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject, catchError, first, Observable, switchMap, tap, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {environments} from "../../environments/environments";
+import {environment} from "../../environments/environment";
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
 
@@ -59,7 +59,7 @@ export class UserService {
     fd.append('email', payload.email);
     fd.append('password', payload.password);
 
-    return this.http.post<TokenResponse>(`${environments.apiBaseUrl}/auth/login`, fd)
+    return this.http.post<TokenResponse>(`${environment.apiBaseUrl}/auth/login`, fd)
       .pipe(
         tap(value => {this.saveTokens(value)}),
         catchError(err => {
@@ -79,7 +79,7 @@ export class UserService {
     fd.append('email', info.email);
     fd.append('password', info.password);
 
-    return this.http.post<TokenResponse>(`${environments.apiBaseUrl}/auth/register`, fd)
+    return this.http.post<TokenResponse>(`${environment.apiBaseUrl}/auth/register`, fd)
       .pipe(
         tap(value => {
           this.saveTokens(value);
@@ -124,7 +124,7 @@ export class UserService {
    */
   public refreshAuthToken(): Observable<TokenRefreshResponse> {
     return this.http.post<TokenRefreshResponse>(
-      `${environments.apiBaseUrl}/auth/refresh`,
+      `${environment.apiBaseUrl}/auth/refresh`,
       null,
       { headers: {
           Authorization: `Bearer ${this.refresh_token}`
@@ -176,7 +176,7 @@ export class UserService {
    * @returns {Observable<UserData>} Observable с данными пользователя.
    */
   public getUser(): Observable<UserData> {
-    return this.http.get<UserData>(`${environments.apiBaseUrl}/account/me`)
+    return this.http.get<UserData>(`${environment.apiBaseUrl}/account/me`)
       .pipe(
         tap(value => {
           this.user.next(value);
@@ -204,7 +204,7 @@ export class UserService {
       fd.append('email', data.email);
     }
 
-    return this.http.patch<UserData>(`${environments.apiBaseUrl}/account/me/edit`, fd)
+    return this.http.patch<UserData>(`${environment.apiBaseUrl}/account/me/edit`, fd)
       .pipe(
         tap(value => {
           this.user.next(value);

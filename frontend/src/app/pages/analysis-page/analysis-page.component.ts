@@ -228,7 +228,7 @@ export class AnalysisPageComponent {
 			years_of_credit_history: this.fb.control<number | null>(null, [Validators.required, Validators.min(0)]),
 		}),
 		slide4: this.fb.group({
-			months_since_delinquent: this.fb.control<number | null>(null, [Validators.required, Validators.min(-1), integerValidator]),
+			months_since_delinquent: this.fb.control<number | null>(null, [Validators.min(-1), integerValidator]),
 			number_of_accounts: this.fb.control<number | null>(null, [Validators.required, Validators.min(0), integerValidator]),
 			number_of_problems: this.fb.control<number | null>(null, [Validators.required, Validators.min(0), integerValidator]),
 		}),
@@ -263,6 +263,9 @@ export class AnalysisPageComponent {
 		if (this.form.invalid) {
 			this.notificationService.throwWarning('Вернитесь и заполните все поля корректно!');
 		} else {
+      if (!this.form.controls.slide4.controls.months_since_delinquent.value) {
+        this.form.controls.slide4.controls.months_since_delinquent.setValue(-1);
+      }
       this.notificationService.showInfo('Ваш запрос был отправлен. Ожидайте ответа.');
 			this.analysisService.doAnalysis(
 				{
