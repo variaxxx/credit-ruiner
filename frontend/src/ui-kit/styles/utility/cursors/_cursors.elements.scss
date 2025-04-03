@@ -1,0 +1,12 @@
+@use '../../utility/cursors/cursors' as *;
+@use '../../utility/breakpoints' as *;
+
+@layer utility {
+  @include cursors(null);
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @include up-breakpoint($breakpoint) {
+      @include cursors($breakpoint);
+    }
+  }
+}

@@ -1,0 +1,151 @@
+@if (isEditing()) {
+<div class="shadow"></div>
+
+<form
+  #modal
+  class="plate edit-wrapper"
+  (ngSubmit)="editProfile()"
+  [formGroup]="editForm"
+>
+  <div class="flex justify-content-between align-items-center">
+    <span class="span-big medium">Редактирование</span>
+    <app-icon-button
+      icon="x"
+      size="sm"
+      (click)="editButtonPressed($event)"
+    ></app-icon-button>
+  </div>
+
+  <app-input
+    light
+    class="st-s"
+    label="Имя"
+    type="text"
+    name="name"
+    placeholder="Ваше имя"
+    autocomplete="off"
+    [control]="getControl('name')"
+  ></app-input>
+
+  <app-input
+    light
+    class="st-xs"
+    label="Почта"
+    type="email"
+    name="email"
+    placeholder="Ваша почта"
+    autocomplete="off"
+    [control]="getControl('email')"
+  ></app-input>
+
+  <app-button size="lg" color="black" class="st-s" type="secondary" submit
+    >Изменить</app-button
+  >
+</form>
+}
+
+<div @onOpen class="container-fluid">
+  <div class="row">
+    <img src="assets/images/abstract.svg" alt="banner" class="banner" />
+  </div>
+
+  <div class="row mtn-48">
+    <div class="col-lg-4 col-md-6 col-sm-12 flex flex-column gap-12">
+      <div class="plate flex flex-column">
+        <div class="flex align-items-center gap-12">
+          <img
+            src="/assets/images/blank_user.jpg"
+            alt="Avatar"
+            class="user-avatar"
+          />
+
+          <div
+            class="user-info flex flex-column gap-4"
+            style="overflow: hidden"
+          >
+            <span class="span-big medium primary text-overflow">
+              {{ username() }}
+            </span>
+            <span class="span-normal secondary text-overflow">
+              {{ email() }}
+            </span>
+          </div>
+        </div>
+
+        <app-button
+          class="w-100 st-xs"
+          size="sm"
+          type="secondary"
+          color="white"
+          (click)="editButtonPressed($event)"
+          >Редактировать</app-button
+        >
+
+        <app-button
+          class="w-100 st-2xs"
+          size="sm"
+          type="secondary"
+          color="white"
+          (click)="logout()"
+          >Выход</app-button
+        >
+      </div>
+    </div>
+
+    <div class="col-lg-8 col-md-6 col-sm-12 sm:mt-12">
+      <div class="plate">
+        <span class="span-big medium ml-8">История</span>
+
+        @if (analysisHistory()?.count) {
+        <ul class="st-xs analysis-list">
+          @for (analysis of analysisHistory()?.items; track $index) {
+          <li
+            class="analysis-item flex justify-content-between align-items-center cursor-pointer"
+            [routerLink]="['..', 'history', analysis.id]"
+          >
+            <div class="flex gap-12 align-items-center">
+              @if (analysis.loan_status) {
+              <div class="analysis-icon-success">
+                <app-icon icon="check-check"></app-icon>
+              </div>
+              } @else {
+              <div class="analysis-icon-deny">
+                <app-icon icon="slash"></app-icon>
+              </div>
+              }
+
+              <span class="span-big name">{{ analysis.name }}</span>
+            </div>
+
+            <span class="span-big medium"
+              >{{ analysis.success_percentage }}%</span
+            >
+          </li>
+          }
+        </ul>
+
+        <div class="w-100 flex justify-content-center st-xs">
+          <span
+            class="span-small cursor-pointer analysis-history"
+            [routerLink]="['/history']"
+            >Просмотреть всю историю</span
+          >
+        </div>
+        } @else {
+        <div class="flex flex-column align-items-center my-32">
+          <span class="span-normal">История пуста</span>
+
+          <app-button
+            class="st-xs"
+            size="sm"
+            type="primary"
+            color="black"
+            [routerLink]="['..', 'analysis']"
+            >Провести анализ</app-button
+          >
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

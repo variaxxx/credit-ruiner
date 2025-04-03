@@ -1,0 +1,37 @@
+@use '../../utility/breakpoints' as *;
+@use '../../utility/colors/colors' as *;
+@use 'sass:list';
+
+$border-radius-values: (0, 6, 8, 12, 18, 20, 24, 30, 32, 36, 40, 48, 64, 80, 96, 112);
+$border-styles: (dotted, dashed, solid, double);
+
+@mixin border-radius($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  @each $radius-value in $border-radius-values {
+    .#{$breakpoint-infix}rounded-#{$radius-value} {
+      border-radius: #{$radius-value}px;
+      -webkit-border-radius: #{$radius-value}px;
+      -moz-border-radius: #{$radius-value}px;
+    }
+  }
+}
+
+@mixin border-style($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  .#{$breakpoint-infix}border-none {
+    border: none;
+  }
+
+  @each $style in $border-styles {
+    @each $color, $gradations in $gradationsMap {
+      @each $gradation in $gradations {
+        $color-selector: #{$color}-#{$gradation};
+        .#{$breakpoint-infix}border-#{$style}-#{$color-selector} {
+          border: 1px #{$style} var(--#{$color-selector});
+        }
+      }
+    }
+  }
+}

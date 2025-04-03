@@ -1,0 +1,15 @@
+@use '../../utility/breakpoints' as *;
+@use '../../utility/spacings/spacings' as *;
+@use 'sass:list';
+
+@mixin gap($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  @each $spacing-value in $spacing-values {
+    @each $position-infix in (null, 'row-', 'column-') {
+      .#{$breakpoint-infix}#{$position-infix}gap-#{$spacing-value} {
+        #{$position-infix}gap: #{$spacing-value}px;
+      }
+    }
+  }
+}

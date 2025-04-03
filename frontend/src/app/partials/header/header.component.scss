@@ -1,0 +1,18 @@
+@use '../../../ui-kit/styles/utility/sizes/sizes' as *;
+
+:host {
+  @include fixed-height(80px);
+
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px 10px 16px;
+  gap: 12px;
+  align-items: center;
+  position: sticky;
+  z-index: 200;
+  top: 0;
+  margin-bottom: 16px;
+  
+  background-color: var(--sidebar-background-color);
+  border-radius: 18px;
+}

@@ -1,0 +1,15 @@
+@use '../breakpoints' as *;
+
+$text-align-values: (
+        center, left, right
+);
+
+@mixin text-align($breakpoint) {
+  @each $value in $text-align-values {
+    $breakpoint-infix: breakpoint-infix($breakpoint);
+
+    .#{$breakpoint-infix}text-align-#{$value} {
+      text-align: #{$value};
+    }
+  }
+}

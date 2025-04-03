@@ -1,0 +1,57 @@
+@use '../../../ui-kit/styles/utility/sizes/sizes' as *;
+@use '../../../ui-kit/styles/utility/breakpoints' as *;
+
+:host {
+	display: block;
+
+	height: 100%;
+	@include up-breakpoint(sm) {
+		@include fixed-height(calc(100% - 96px))
+	}
+
+	.analysis-wrapper {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+
+		padding: 0 16px 16px 16px;
+	}
+
+	.analysis-item {
+		display: flex;
+		flex-direction: column;
+		border-radius: 18px;
+		background-color: var(--background-accent-color);
+		cursor: pointer;
+		overflow: hidden;
+		transition: var(--default-transition);
+		
+		&:hover {
+			transform: scale(1.05);
+		}
+	}
+
+	.secondary {
+		color: var(--secondary-text-color);
+	}
+
+	.nav-item {
+		@include fixed-size(32px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		cursor: pointer;
+		color: var(--secondary-text-color);
+		transition: color var(--default-transition);
+
+		&.current {
+			background-color: var(--sidebar-background-accent-color);
+			color: var(--sidebar-primary-text-color);
+		}
+
+		&:hover:not(.current) {
+			color: var(--primary-text-color);
+		}
+	}
+}

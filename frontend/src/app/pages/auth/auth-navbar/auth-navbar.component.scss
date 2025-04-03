@@ -1,0 +1,33 @@
+@use '../../../../ui-kit/styles/utility/typography/typography' as *;
+
+:host {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  .nav-wrapper {
+    @include span-styles;
+    @include span-normal;
+
+    border:  1px solid rgb(255, 255, 255, .1);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    color: var(--black-300);
+  }
+
+  .nav-item {
+    padding: 12px 24px 12px 24px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color var(--default-transition), color var(--default-transition);
+
+    &.active {
+      @include weight-medium;
+
+      background-color: white;
+      color: black;
+    }
+  }
+}

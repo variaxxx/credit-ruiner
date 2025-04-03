@@ -1,0 +1,39 @@
+networks:
+  dev:
+
+services:
+  nginx:
+    container_name: credit-ruiner-nginx
+    image: nginx:stable-alpine
+    restart: on-failure
+    ports:
+      - "80:80"
+    volumes:
+      - "./nginx.conf:/etc/nginx/nginx.conf"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - dev
+
+  frontend:
+    container_name: credit-ruiner-frontend
+    build: ./frontend/
+    restart: on-failure
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    networks:
+      - dev
+
+  backend:
+    container_name: credit-ruiner-backend
+    build: ./backend/
+    restart: on-failure
+    environment:
+      - JWT_SECRET_KEY=e1b940ba130271683f117b5adb9a7885cc83cabc5a8700f89ecc4b6ed68cc57d
+    expose:
+      - "5000"
+    networks:
+      - dev

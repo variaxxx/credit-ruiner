@@ -1,0 +1,40 @@
+@use '../../styles/utility/sizes/sizes' as *;
+
+app-icon-button {
+  button {
+    border-radius: 50%;
+    padding: 8px;
+    transition: var(--default-transition);
+
+    &:hover {
+      background-color: var(--background-color);
+
+      app-icon {
+        --icon-color: var(--primary-text-color);
+      }
+    }
+
+    app-icon {
+      margin: auto;
+      --icon-color: var(--secondary-text-color);
+    }
+
+    &[data-size="sm"] {
+      app-icon {
+        --icon-size: 18px;
+      }
+    }
+
+    &[data-size="md"] {
+      app-icon {
+        --icon-size: 24px;
+      }
+    }
+
+    &[data-size="lg"] {
+      app-icon {
+        --icon-size: 30px;
+      }
+    }
+  }
+}

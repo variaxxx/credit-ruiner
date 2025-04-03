@@ -1,0 +1,33 @@
+@use '../../../../ui-kit/styles/utility/typography/typography' as *;
+
+:host {
+  display: block;
+  min-height: calc(100dvh - 66px);
+  height: 640px;
+
+  .login-form {
+    position: relative;
+    z-index: 2;
+    background-color: rgb(255, 255, 255, .05);
+    border:  1px solid rgb(255, 255, 255, .1);
+    backdrop-filter: blur(5px);
+  }
+
+  .login-title {
+    position: relative;
+    font-family: Unbounded, sans-serif;
+    align-self: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    top: min(calc(50px / 3), calc(100dvw / 22));
+    z-index: 1;
+    color: white;
+    font-size: min(50px, calc(100dvw / 11));
+  }
+
+  .registration-alert {
+    --icon-size: 16px;
+  }
+}

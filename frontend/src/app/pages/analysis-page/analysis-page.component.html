@@ -1,0 +1,307 @@
+<div @onOpen class="container-fluid flex flex-column justify-content-center">
+  @if (!inProgress()) {
+
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-lg-6 сol-md-8 col-sm-12 flex flex-column px-32">
+        <h3 class="text-align-center">
+          Проверь свою кредитоспособность с CreditRuiner
+        </h3>
+        <span class="span-big st-s" style="text-align: center;">
+          Заполните несколько простых шагов, и мы проведем анализ ваших финансовых данных. Это поможет вам понять свои риски и повысить шансы на одобрение кредита.
+        </span>
+        <app-button
+          size="lg"
+          color="black"
+          (click)="inProgress.set(true)"
+          class="st-s"
+        >
+          Начать
+        </app-button>
+      </div>
+    </div>
+
+  } @else {
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10 col-sm-12 flex flex-column">
+        <div class="stepper-wrapper px-32 w-100 flex sm:none">
+          @for (i of [1, 2, 3, 4, 5]; track $index) {
+            <div
+              class="stepper-marker"
+              [class.done]="currentSlide() > i"
+              [class.active]="currentSlide() == i"
+              (click)="currentSlide.set(i)"
+            >
+              @if (currentSlide() > i) {
+                <app-icon
+                  [icon]="getStepperIcon(i)"
+                ></app-icon>
+              } @else {
+                <span class="span-big">{{ i }}</span>
+              }
+            </div>
+
+            @if (i != 5) {
+              <div
+                class="stepper-line"
+                [class.done]="currentSlide() >= i + 1"
+              ></div>
+            }
+          }
+        </div>
+      </div>
+    </div>
+
+    <div [@slideAnimation]="currentSlide()" class="row justify-content-center">
+      <div class="col-lg-8 col-md-10 col-sm-12 flex flex-column h-100">
+        @if (currentSlide() == 1) {
+
+          <h1 class="px-32 md:px-12 st-s" style="text-align: center">
+            Основная информация
+          </h1>
+
+          <form class="flex flex-column st-s" [formGroup]="form.controls.slide1">
+            <app-input
+              class="w-100"
+              label="Как вас зовут?"
+              autocomplete="off"
+              name="name"
+              placeholder="Введите имя"
+              light
+              [control]="getControl(1, 'name')"
+            ></app-input>
+
+            <app-input
+              class="st-s w-100"
+              label="Какова сумма кредита?"
+              autocomplete="off"
+              name="current_loan_amount"
+              placeholder="Введите сумму кредита"
+              type="number"
+              light
+              [control]="getControl(1, 'current_loan_amount')"
+            ></app-input>
+
+            <span class="span-normal st-s w-auto px-16"
+            >На какой срок планируется брать кредит?</span
+            >
+            <div class="st-2xs flex w-100 gap-8 sm:flex-column">
+              <app-select-item
+                header="Краткосрочный"
+                description="До 1 года"
+                class="flex-grow-1"
+                [class.selected]="isSelectedTerm('SHORT')"
+                (click)="selectTerm('SHORT')"
+              ></app-select-item>
+
+              <app-select-item
+                header="Долгосрочный"
+                description="Более 1 года"
+                class="flex-grow-1"
+                [class.selected]="isSelectedTerm('LONG')"
+                (click)="selectTerm('LONG')"
+              ></app-select-item>
+            </div>
+          </form>
+
+          <div class="flex justify-content-between gap-12 st-s sb-s">
+            <app-button color="white" (click)="inProgress.set(false)">
+              Назад
+            </app-button>
+            <app-button color="black" (click)="currentSlide.set(2)">
+              Далее
+            </app-button>
+          </div>
+
+        } @else if (currentSlide() == 2) {
+
+          <h1 class="px-32 md:px-12 st-s" style="text-align: center">
+            Занятость и доход
+          </h1>
+
+          <form class="flex flex-column" [formGroup]="form.controls.slide2">
+            <app-input-select
+              class="st-s"
+              label="Сколько лет вы работаете на текущей работе?"
+              [options]="yearsInJobOptions"
+              [control]="getControl(2, 'years_in_job')"
+            ></app-input-select>
+
+            <app-input-select
+              class="st-s"
+              label="Какой у вас тип жилья?"
+              [options]="homeOwnershipOptions"
+              [control]="getControl(2, 'home_ownership')"
+            ></app-input-select>
+
+            <app-input
+              class="st-s w-100"
+              label="Каков Ваш годовой доход?"
+              autocomplete="off"
+              name="annual_income"
+              placeholder="Введите Ваш доход"
+              type="number"
+              light
+              [control]="getControl(2, 'annual_income')"
+            ></app-input>
+          </form>
+
+          <div class="flex justify-content-between gap-12 st-s sb-s">
+            <app-button color="white" (click)="currentSlide.set(1)">
+              Назад
+            </app-button>
+            <app-button color="black" (click)="currentSlide.set(3)">
+              Далее
+            </app-button>
+          </div>
+
+        } @else if (currentSlide() == 3) {
+
+          <h1 class="px-32 md:px-12 st-s" style="text-align: center">
+            Цель кредита и ежемесячные расходы
+          </h1>
+
+          <form class="flex flex-column" [formGroup]="form.controls.slide3">
+            <app-input-select
+              class="st-s"
+              label="Какова цель кредита?"
+              [options]="purposeOptions"
+              [control]="getControl(3, 'purpose')"
+            ></app-input-select>
+
+            <app-input
+              class="st-s w-100"
+              label="Сколько в среднем вы платите по долгам в месяц?"
+              autocomplete="off"
+              name="monthly_debt"
+              placeholder="Введите сумму"
+              type="number"
+              light
+              [control]="getControl(3, 'monthly_debt')"
+            ></app-input>
+
+            <app-input
+              class="st-s w-100"
+              label="Сколько лет у вас кредитная история? "
+              autocomplete="off"
+              name="years_of_credit_history"
+              placeholder="Введите количество лет"
+              type="number"
+              light
+              [control]="getControl(3, 'years_of_credit_history')"
+            ></app-input>
+          </form>
+
+          <div class="flex justify-content-between gap-12 st-s sb-s">
+            <app-button color="white" (click)="currentSlide.set(2)">
+              Назад
+            </app-button>
+            <app-button color="black" (click)="currentSlide.set(4)">
+              Далее
+            </app-button>
+          </div>
+
+        } @else if (currentSlide() == 4) {
+
+          <h1 class="px-32 md:px-12 st-s" style="text-align: center">
+            Кредитная история
+          </h1>
+
+          <form class="flex flex-column" [formGroup]="form.controls.slide4">
+            <app-input
+              class="st-s w-100"
+              label="Сколько месяцев прошло с последнего просроченного платежа?"
+              autocomplete="off"
+              name="months_since_delinquent"
+              placeholder="Введите число месяцев"
+              type="number"
+              light
+              [control]="getControl(4, 'months_since_delinquent')"
+            ></app-input>
+
+            <app-input
+              class="st-s w-100"
+              label="Сколько у вас открытых кредитных счетов?"
+              autocomplete="off"
+              name="number_of_accounts"
+              placeholder="Введите число счетов"
+              type="number"
+              light
+              [control]="getControl(4, 'number_of_accounts')"
+            ></app-input>
+
+            <app-input
+              class="st-s w-100"
+              label="Сколько у вас было проблем с кредитами (просрочки, коллекторы и т.д.)? "
+              autocomplete="off"
+              name="number_of_problems"
+              placeholder="Введите число проблем"
+              type="number"
+              light
+              [control]="getControl(4, 'number_of_problems')"
+            ></app-input>
+          </form>
+
+          <div class="flex justify-content-between gap-12 st-s sb-s">
+            <app-button color="white" (click)="currentSlide.set(3)">
+              Назад
+            </app-button>
+            <app-button color="black" (click)="currentSlide.set(5)">
+              Далее
+            </app-button>
+          </div>
+
+        } @else if (currentSlide() == 5) {
+
+          <h1 class="px-32 md:px-12 st-s" style="text-align: center">
+            Финансовое состояние
+          </h1>
+
+          <form class="flex flex-column" [formGroup]="form.controls.slide5">
+            <app-input
+              class="st-s w-100"
+              label="Какой у вас текущий кредитный баланс?"
+              autocomplete="off"
+              name="current_credit_balance"
+              placeholder="Введите баланс"
+              type="number"
+              light
+              [control]="getControl(5, 'current_credit_balance')"
+            ></app-input>
+
+            <app-input
+              class="st-s w-100"
+              label="Сколько у вас было банкротств?"
+              autocomplete="off"
+              name="current_credit_balance"
+              placeholder="Введите число"
+              type="number"
+              light
+              [control]="getControl(5, 'bankruptcies')"
+            ></app-input>
+
+            <app-input
+              class="st-s w-100"
+              label="Сколько у вас налоговых задолженностей?"
+              autocomplete="off"
+              name="current_credit_balance"
+              placeholder="Введите число"
+              type="number"
+              light
+              [control]="getControl(5, 'tax_liens')"
+            ></app-input>
+          </form>
+
+          <div class="flex justify-content-between gap-12 st-s sb-s">
+            <app-button color="white" (click)="currentSlide.set(4)">
+              Назад
+            </app-button>
+            <app-button color="black" (click)="onSubmit()">
+              Завершить
+            </app-button>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

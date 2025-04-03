@@ -1,0 +1,11 @@
+.venv/
+.git/
+.idea/
+.dockerignore
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+venv/

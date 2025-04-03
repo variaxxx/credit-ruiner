@@ -1,0 +1,101 @@
+@use '../../../ui-kit/styles/utility/sizes/sizes' as *;
+
+:host {
+  min-height: 100dvh;
+  height: 640px;
+
+  display: block;
+  background-color: var(--black-1000);
+
+  .row {
+    overflow: hidden;
+  }
+
+  .welcome {
+    &-wrapper {
+      animation: 2s text-animation forwards;
+      align-self: center;
+      padding: 0 16px 0 16px;
+      z-index: 999;
+    }
+
+    &-logo {
+      --icon-size: 64px;
+      position: absolute;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+    }
+
+    &-header, &-description {
+      text-align: center;
+    }
+
+    &-header {
+      color: var(--sidebar-primary-text-color);
+      font-family: var(--specific-font), sans-serif;
+    }
+
+    &-description {
+      max-width: 640px;
+      color: var(--sidebar-secondary-text-color);
+    }
+
+    &-btn {
+      @include fixed-width(256px);
+    }
+
+    &-img {
+      position: absolute;
+      object-fit: contain;
+      min-width: 120%;
+      top: 50%;
+      right: 0;
+      z-index: 1;
+      transform: translateY(-50%);
+      animation: 1s img-animation forwards;
+
+      &-wrapper {
+        position: relative;
+        height: 100%;
+      }
+      
+      &-mobile {
+        filter: brightness(0.6);
+        position: absolute;
+        bottom: 0;
+        right: 50%;
+        transform: translateX(50%);
+        animation: 1s img-animation forwards;
+      }
+    }
+  }
+}
+
+@keyframes text-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes img-animation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

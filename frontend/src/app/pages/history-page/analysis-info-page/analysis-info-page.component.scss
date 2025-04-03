@@ -1,0 +1,13 @@
+.img-banner {
+  border-radius: 18px;
+  height: 128px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.plate {
+  background-color: var(--background-accent-color);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--soft-shadow);
+}

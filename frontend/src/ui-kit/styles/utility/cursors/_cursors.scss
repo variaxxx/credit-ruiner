@@ -1,0 +1,17 @@
+@use '../../utility/breakpoints' as *;
+$cursors: (
+  auto,
+  pointer,
+  wait,
+  move
+);
+
+@mixin cursors($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  @each $cursor in $cursors {
+    .#{$breakpoint-infix}cursor-#{$cursor} {
+      cursor: $cursor;
+    }
+  }
+}

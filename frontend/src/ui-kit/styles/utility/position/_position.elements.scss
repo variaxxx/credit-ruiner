@@ -1,0 +1,10 @@
+@use '../../utility/breakpoints' as *;
+@use '../../utility/position/position' as *;
+
+@layer utility {
+  @include positions(null);
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @include positions($breakpoint);
+  }
+}

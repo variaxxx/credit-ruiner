@@ -1,0 +1,9 @@
+<button
+  class="rounded-18 w-100"
+  [type]="submit ? 'submit' : 'button'"
+  [attr.data-size]="size"
+  [attr.data-color]="color"
+  [attr.data-type]="type"
+>
+  <ng-content></ng-content>
+</button>

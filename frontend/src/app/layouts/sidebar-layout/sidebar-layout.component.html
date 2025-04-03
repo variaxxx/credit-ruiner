@@ -1,0 +1,9 @@
+<router-outlet name="sidebar"></router-outlet>
+<div class="block content">
+  @if (showHeader) {
+    <app-header></app-header>
+  }
+
+  <router-outlet></router-outlet>
+  <router-outlet name="footer"></router-outlet>
+</div>

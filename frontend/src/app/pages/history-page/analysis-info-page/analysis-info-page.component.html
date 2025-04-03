@@ -1,0 +1,41 @@
+<!--TODO: remove btn-->
+
+<div class="container-fluid">
+  <div class="row align-items-center flex-column">
+    <div class="col-lg-6 col-md-10 col-sm-12">
+      <app-button [routerLink]="['..']" class="w-100 sb-s">Вернуться назад</app-button>
+    </div>
+
+    <div class="col-lg-6 col-md-10 col-sm-12 plate">
+      <img [src]="analysisInfo()?.loan_status == 1 ? 'assets/images/history-accepted.png' : 'assets/images/history-denied.png'" alt="pic" class="img-banner">
+      <h3 class="st-s ml-16">Статус анализа</h3>
+
+      <div class="ml-8 flex flex-column st-xs">
+        <span class="span-big">Шанс выдачи: {{ analysisInfo()?.success_percentage }}%</span>
+        <span class="span-big st-2xs">Предположительный результат: {{ analysisInfo()?.loan_status ? 'Успех' : 'Отказ' }} </span>
+      </div>
+
+
+      <h3 class="st-s ml-16">Информация о заемщике</h3>
+
+      <div class="ml-8 flex flex-column st-xs sb-s">
+        <span class="span-big">Имя: {{ analysisInfo()?.name }}</span>
+        <span class="span-big st-2xs">Дата проведения: {{ analysisInfo()?.date | date }}</span>
+        <span class="span-big st-2xs">Сумма кредита: {{ analysisInfo()?.current_loan_amount }} руб</span>
+        <span class="span-big st-2xs">Срок: {{ analysisInfo()?.term == 'SHORT' ? 'Краткосрочный' : 'Долгосрочный' }}</span>
+        <span class="span-big st-2xs">Стаж работы в годах: {{ analysisInfo()?.years_in_job }}</span>
+        <span class="span-big st-2xs">Тип жилья: {{ analysisInfo()?.home_ownership == 'OWN' ? 'Собственное' : (analysisInfo()?.home_ownership == 'RENT' ? 'Аренда' : 'Ипотека')}}</span>
+        <span class="span-big st-2xs">Годовой доход: {{ analysisInfo()?.annual_income }} руб</span>
+        <span class="span-big st-2xs">Цель кредита: {{ getPurpose() }}</span>
+        <span class="span-big st-2xs">Платеж по долгам в месяц: {{ analysisInfo()?.monthly_debt }} руб</span>
+        <span class="span-big st-2xs">Продолжительность кредитной истории в годах: {{ analysisInfo()?.years_of_credit_history }}</span>
+        <span class="span-big st-2xs">Количество месяцев с последнего просроченного платежа: {{ analysisInfo()?.months_since_delinquent != -1 ? analysisInfo()?.months_since_delinquent : 'Не было таковых' }}</span>
+        <span class="span-big st-2xs">Количество кредитных счетов: {{ analysisInfo()?.number_of_accounts }}</span>
+        <span class="span-big st-2xs">Количество проблем с кредитами: {{ analysisInfo()?.number_of_problems }}</span>
+        <span class="span-big st-2xs">Текущий кредитный баланс: {{ analysisInfo()?.current_credit_balance }}</span>
+        <span class="span-big st-2xs">Количество банкротств: {{ analysisInfo()?.bankruptcies }}</span>
+        <span class="span-big st-2xs">Количество налоговых задолженностей: {{ analysisInfo()?.tax_liens }}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+@use '../../utility/breakpoints' as *;
+
+$flex-wrap-values: (
+  wrap, wrap-reverse, no-wrap
+);
+
+
+@mixin flex-wrap($breakpoint) {
+  @each $wrap in $flex-wrap-values {
+    $breakpoint-infix: breakpoint-infix($breakpoint);
+
+    .#{$breakpoint-infix}flex-#{$wrap} {
+      flex-wrap: $wrap;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@use '../../utility/breakpoints' as *;
+
+@mixin flex-order($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  @for $i from 1 through 8 {
+    .#{$breakpoint-infix}flex-order-#{$i} {
+      order: $i;
+    }
+  }
+}

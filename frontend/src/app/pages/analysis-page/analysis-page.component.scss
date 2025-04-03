@@ -1,0 +1,89 @@
+@use '../../../ui-kit/styles/utility/sizes/sizes' as *;
+@use '../../../ui-kit/styles/utility/typography/typography' as *;
+@use '../../../ui-kit/styles/utility/breakpoints' as *;
+
+:host {
+  display: block;
+
+  height: 100%;
+  @include up-breakpoint(sm) {
+    @include fixed-height(calc(100% - 96px))
+  }
+
+  .text-align-center {
+    text-align: center;
+  }
+
+  .container-fluid {
+    min-height: 100%;
+  }
+
+  .stepper {
+    &-wrapper {
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-marker {
+      @include fixed-size(32px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 50%;
+      background-color: var(--black-950);
+      position: relative;
+      z-index: 2;
+      border: 2px solid var(--background-color);
+      transition: background-color var(--smooth-transition), color var(--smooth-transition);
+
+      app-icon {
+        --icon-color: var(--sidebar-primary-text-color);
+        --icon-size: 16px;
+      }
+
+      &.active {
+        color: var(--sidebar-primary-text-color);
+      }
+
+      &.done {
+        background-color: var(--sidebar-background-color);
+      }
+
+      &:not(.done):not(.active) {
+        background-color: var(--black-150);
+      }
+    }
+
+    &-line {
+      @include fixed-height(16px);
+      margin: 0 -5px;
+      width: 100%;
+      background-color: var(--black-950);
+      transition: background-color var(--smooth-transition);
+
+      &:not(.done):not(.active) {
+        background-color: var(--black-150);
+      }
+    }
+  }
+
+  .poll {
+    &-container {
+      background-color: var(--background-accent-color);
+      border-radius: 18px;
+      padding: 0 16px 0 16px;
+
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      grid-gap: 16px;
+      justify-content: center;
+      box-shadow: var(--soft-shadow);
+
+      form {
+        width: fit-content;
+      }
+    }
+  }
+}

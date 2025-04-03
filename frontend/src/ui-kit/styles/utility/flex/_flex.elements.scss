@@ -1,0 +1,39 @@
+@use '../../utility/breakpoints' as *;
+@use '../../utility/flex/align-content' as *;
+@use '../../utility/flex/align-items' as *;
+@use '../../utility/flex/flex' as *;
+@use '../../utility/flex/flex-direction' as *;
+@use '../../utility/flex/flex-grow-shrink' as *;
+@use '../../utility/flex/flex-order' as *;
+@use '../../utility/flex/flex-wrap' as *;
+@use '../../utility/flex/gap' as *;
+@use '../../utility/flex/justify-content' as *;
+@use 'text-align' as *;
+
+@layer utility {
+  @include align-content(null);
+  @include align-items-or-self(null);
+  @include flex(null);
+  @include flex-direction(null);
+  @include flex-grow-shrink(null);
+  @include flex-order(null);
+  @include flex-wrap(null);
+  @include gap(null);
+  @include justify-content(null);
+  @include text-align(null);
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @include up-breakpoint($breakpoint) {
+      @include align-content($breakpoint);
+      @include align-items-or-self($breakpoint);
+      @include flex($breakpoint);
+      @include flex-direction($breakpoint);
+      @include flex-grow-shrink($breakpoint);
+      @include flex-order($breakpoint);
+      @include flex-wrap($breakpoint);
+      @include gap($breakpoint);
+      @include justify-content($breakpoint);
+      @include text-align($breakpoint);
+    }
+  }
+}

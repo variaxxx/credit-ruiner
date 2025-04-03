@@ -1,0 +1,88 @@
+@use '../../../ui-kit/styles/utility/typography/typography' as *;
+
+app-button {
+  display: block;
+
+  button {
+    @include span-styles;
+    @include span-normal;
+    @include weight-regular;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: .2em solid transparent;
+    transition: transform var(--default-transition), border-color var(--default-transition), background-color var(--default-transition);
+
+    &[data-type="primary"] {
+      @include weight-medium;
+    }
+
+    &[data-size="sm"] {
+      padding: 12px 16px 12px 16px;
+    }
+
+    &[data-size="md"] {
+      padding: 16px 20px 16px 20px;
+    }
+
+    &[data-size="lg"] {
+      padding: 20px 24px 20px 24px;
+    }
+
+    &[data-color="white"] {
+
+      border-width: 2px;
+      border-color: var(--black-100);
+
+      background-color: white;
+      color: black;
+
+      &:enabled:hover {
+        background-color: var(--black-100);
+      }
+
+      &:enabled:active {
+        background-color: white;
+      }
+    }
+
+    &[data-color="green"] {
+      background-color: var(--green-250);
+      color: var(--green-700);
+
+      &:enabled:hover {
+        background-color: var(--green-300);
+      }
+
+      &:enabled:active {
+        background-color: var(--green-250);
+        border-color: var(--green-300);
+      }
+    }
+
+    &[data-color="black"] {
+      background-color: var(--sidebar-background-color);
+      color: var(--black-50);
+
+      &:enabled:hover {
+        background-color: var(--sidebar-background-accent-color);
+      }
+
+      &:enabled:active {
+        background-color: var(--sidebar-background-color);
+        border-color: var(--black-800);
+      }
+    }
+
+    &:enabled:active {
+      transform: scale(.95);
+    }
+  }
+}

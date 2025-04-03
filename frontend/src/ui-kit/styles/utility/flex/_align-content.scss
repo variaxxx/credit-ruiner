@@ -1,0 +1,19 @@
+@use '../../utility/breakpoints' as *;
+$align-content-options: (
+  'start': flex-start,
+  'end': flex-end,
+  'center': center,
+  'between': space-between,
+  'around': space-around,
+  'evenly': space-evenly,
+);
+
+@mixin align-content($breakpoint) {
+  @each $name in map-keys($align-content-options) {
+    $breakpoint-infix: breakpoint-infix($breakpoint);
+
+    .#{$breakpoint-infix}align-content-#{$name} {
+      align-content: map-get($align-content-options, $name);
+    }
+  }
+}

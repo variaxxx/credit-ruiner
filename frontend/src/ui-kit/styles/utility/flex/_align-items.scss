@@ -1,0 +1,24 @@
+@use '../../utility/breakpoints' as *;
+
+$align-items-options: (
+  'start': flex-start,
+  'end': flex-end,
+  'center': center,
+  'stretch': stretch,
+  'baseline': baseline,
+);
+
+
+@mixin align-items-or-self($breakpoint) {
+  @each $name in map-keys($align-items-options) {
+    $breakpoint-infix: breakpoint-infix($breakpoint);
+
+    .#{$breakpoint-infix}align-items-#{$name} {
+      align-items: map-get($align-items-options, $name);
+    }
+
+    .#{$breakpoint-infix}align-self-#{$name} {
+      align-self: map-get($align-items-options, $name);
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@use '../../utility/breakpoints' as *;
+
+@mixin flex-grow-shrink($breakpoint) {
+  $breakpoint-infix: breakpoint-infix($breakpoint);
+
+  @each $property in (shrink, grow) {
+    @each $value in (0, 1) {
+      .#{$breakpoint-infix}flex-#{$property}-#{$value} {
+        flex-#{$property}: $value;
+      }
+    }
+  }
+}
